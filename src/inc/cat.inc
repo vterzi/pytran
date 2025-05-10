@@ -1,6 +1,7 @@
 ! () -> (_PASTE, _CAT, _CAT3, _CAT4, _CAT5, _CAT6, _CAT7, _CAT8, _CAT9)
-! Define the concatenation macros for up to 9 arguments.  The macro for two arguments is `_CAT(<string_1>,<string_2>)`.  The macros
-! for more arguments contain the number of arguments as a suffix in their names.
+! Define the concatenation macros for up to 9 arguments.  The macro for two
+! arguments is `_CAT(<arg-1>,<arg-2>)`.  The macros for more arguments contain
+! the number of arguments as a suffix in their names.
 
 #undef _PASTE
 #define _PASTE(X) X

@@ -1,6 +1,7 @@
 ! () -> ([_STRING], _STR0, _STR)
-! Define the combination of macros `_STR0` and `_STR(<string>)` to stringify its argument.  The combination starts with `_STR0`
-! followed by `_STR(<string>)` at the beginning of the next line.
+! Define the combination of macros `_STR0` and `_STR(<arg>)` to stringify its
+! argument.  The combination starts with `_STR0` followed by `_STR(<string>)`
+! at the beginning of the next line.
 
 #undef _STR0
 #undef _STR
