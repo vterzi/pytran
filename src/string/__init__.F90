@@ -161,8 +161,6 @@ module stdlib_string
     !--------------------------------------------------------------------------
 
 #include "../inc/proc.inc"
-#define _DECL_ONE(X) module procedure :: _UNARY(X)
-#define _DECL_TWO(X,Y) module procedure :: _BINARY(X,Y)
 
 #define _DECL(X) public :: _CAT3(to_,_TYPE_NAME,X)
 #define _ID _LOGICAL
@@ -287,9 +285,6 @@ module stdlib_string
 #include "../inc/decls.inc"
     end interface
 #undef _OP
-
-#undef _DECL_ONE
-#undef _DECL_TWO
 
     interface isdecimal
         module procedure isdigit

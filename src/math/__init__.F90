@@ -9,8 +9,6 @@ module stdlib_math
     private
 
 #include "../inc/proc.inc"
-#define _DECL_ONE(X) module procedure :: _UNARY(X)
-#define _DECL_TWO(X,Y) module procedure :: _BINARY(X,Y)
 
 #define _OP dec_digits
     public :: _OP
@@ -27,9 +25,6 @@ module stdlib_math
 #include "../inc/decls.inc"
     end interface _OP
 #undef _OP
-
-#undef _DECL_ONE
-#undef _DECL_TWO
 
 #ifdef _HP
     real(HP), parameter, public :: &

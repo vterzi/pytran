@@ -13,8 +13,6 @@ module stdlib_array
     integer, parameter :: SIMPLE_SORT_SIZE = 5
 
 #include "../inc/proc.inc"
-#define _DECL_ONE(X) module procedure :: _UNARY(X)
-#define _DECL_TWO(X,Y) module procedure :: _BINARY(X,Y)
 
 #define _OP sort
     interface _OP
@@ -37,9 +35,6 @@ module stdlib_array
 #include "../inc/decls.inc"
     end interface _OP
 #undef _OP
-
-#undef _DECL_ONE
-#undef _DECL_TWO
 
 contains
 

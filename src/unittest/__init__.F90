@@ -12,7 +12,6 @@ module stdlib_unittest
         assert_equal, assert_not_equal, assert_greater, assert_greater_equal, assert_less, assert_less_equal
 
 #include "../inc/proc.inc"
-#define _DECL_ONE(X) module procedure :: _UNARY(X)
 
 #define _OP assert_true
     interface _OP
@@ -101,8 +100,6 @@ module stdlib_unittest
 #include "../inc/decls.inc"
     end interface _OP
 #undef _OP
-
-#undef _DECL_ONE
 
 contains
 #define _FILE "../unittest/logical.inc"
