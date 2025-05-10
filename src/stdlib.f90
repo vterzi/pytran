@@ -7,6 +7,8 @@ module stdlib
     use stdlib_unittest
     use stdlib_list
     use stdlib_io
+    use stdlib_time
+    use stdlib_subprocess
 
     implicit none
 end module stdlib
