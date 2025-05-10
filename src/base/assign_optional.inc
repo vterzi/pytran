@@ -8,7 +8,7 @@ elemental subroutine _PROC(var, val, opt)
     _ARG_TYPE, intent(in) :: val
     _ARG_TYPE, intent(in), optional :: opt
 
-    if (PRESENT(opt)) then
+    if (present(opt)) then
         var = opt
     else
         var = val

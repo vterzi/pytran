@@ -12,7 +12,7 @@
 type _NODE
     private
     _NODE_TYPE :: val
-    type(_NODE), pointer :: next => NULL()
+    type(_NODE), pointer :: next => null()
 end type _NODE
 
 type, public :: _ITER
@@ -20,7 +20,7 @@ type, public :: _ITER
 #ifdef _ARRAY
     integer :: dimension_
 #endif
-    type(_NODE), pointer :: node => NULL()
+    type(_NODE), pointer :: node => null()
 contains
     _METHOD(_ITER,Get)
     _METHOD(_ITER,Set)
@@ -38,7 +38,7 @@ type, public :: _LIST
     integer :: dimension_ = 0
 #endif
     integer :: size_ = 0
-    type(_NODE), pointer :: first => NULL(), last => NULL()
+    type(_NODE), pointer :: first => null(), last => null()
 contains
 #ifdef _ARRAY
     _METHOD(_LIST,Dimension)

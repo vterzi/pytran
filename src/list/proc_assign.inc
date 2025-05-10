@@ -1,7 +1,7 @@
 #ifdef _ARG_ARRAY
 #  define _PROC_NAME _SUBPROC(_LIST,Assign,Array)
 #  define _ARG_IN_TYPE _IN_TYPE_ARR
-#  define _ARG_DIM SIZE(arg, 1)
+#  define _ARG_DIM size(arg, 1)
 #  define _ARG_SIZE _ARR_SIZE(arg)
 #  define _ARG_ELEM(X) arg(_ARR_IDX(X))
 #else
@@ -29,7 +29,7 @@ subroutine _PROC_NAME(this, arg)
     this%dimension_ = _ARG_DIM
 #endif
     size_ = _ARG_SIZE
-    li = MIN(this%size_, size_)
+    li = min(this%size_, size_)
     node => this%first
     do i = 1, li
         node%val = _ARG_ELEM(i)

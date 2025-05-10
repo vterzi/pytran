@@ -38,7 +38,7 @@ contains
         msg = 'Dimension'
         list = IntegerArrayList(3)
         call assert_equal(3, list%Dimension(), msg, success)
-        list = RESHAPE([1, 2, 3, 4, 5, 6], [2, 3])
+        list = reshape([1, 2, 3, 4, 5, 6], [2, 3])
         call assert_equal(2, list%Dimension(), msg, success)
     end subroutine test_Dimension
 
@@ -304,31 +304,31 @@ contains
         call iList%Multiply(-2, 11)
         call assert_true(ALL([8, 2, 30, 4, 5, 66, 63] == iList%ToArray()), msg, success)
 
-        iaList = RESHAPE([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], [2, 7])
+        iaList = reshape([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], [2, 7])
         call iaList%Add(1, 8)
-        call assert_true(ALL(RESHAPE([9, 10, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], [2, 7]) == iaList%ToArray()), &
+        call assert_true(ALL(reshape([9, 10, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], [2, 7]) == iaList%ToArray()), &
             msg, success)
         call iaList%Add(7, [9, -9])
-        call assert_true(ALL(RESHAPE([9, 10, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 22, 5], [2, 7]) == iaList%ToArray()), &
+        call assert_true(ALL(reshape([9, 10, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 22, 5], [2, 7]) == iaList%ToArray()), &
             msg, success)
         call iaList%Add(3, 10)
-        call assert_true(ALL(RESHAPE([9, 10, 3, 4, 15, 16, 7, 8, 9, 10, 11, 12, 22, 5], [2, 7]) == iaList%ToArray()), &
+        call assert_true(ALL(reshape([9, 10, 3, 4, 15, 16, 7, 8, 9, 10, 11, 12, 22, 5], [2, 7]) == iaList%ToArray()), &
             msg, success)
         call iaList%Add(-2, [11, -11])
-        call assert_true(ALL(RESHAPE([9, 10, 3, 4, 15, 16, 7, 8, 9, 10, 22, 1, 22, 5], [2, 7]) == iaList%ToArray()), &
+        call assert_true(ALL(reshape([9, 10, 3, 4, 15, 16, 7, 8, 9, 10, 22, 1, 22, 5], [2, 7]) == iaList%ToArray()), &
             msg, success)
-        iaList = RESHAPE([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], [2, 7])
+        iaList = reshape([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], [2, 7])
         call iaList%Multiply(1, 8)
-        call assert_true(ALL(RESHAPE([8, 16, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], [2, 7]) == iaList%ToArray()), &
+        call assert_true(ALL(reshape([8, 16, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], [2, 7]) == iaList%ToArray()), &
             msg, success)
         call iaList%Multiply(7, [9, -9])
-        call assert_true(ALL(RESHAPE([8, 16, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 117, -126], [2, 7]) == iaList%ToArray()), &
+        call assert_true(ALL(reshape([8, 16, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 117, -126], [2, 7]) == iaList%ToArray()), &
             msg, success)
         call iaList%Multiply(3, 10)
-        call assert_true(ALL(RESHAPE([8, 16, 3, 4, 50, 60, 7, 8, 9, 10, 11, 12, 117, -126], [2, 7]) == iaList%ToArray()), &
+        call assert_true(ALL(reshape([8, 16, 3, 4, 50, 60, 7, 8, 9, 10, 11, 12, 117, -126], [2, 7]) == iaList%ToArray()), &
             msg, success)
         call iaList%Multiply(-2, [11, -11])
-        call assert_true(ALL(RESHAPE([8, 16, 3, 4, 50, 60, 7, 8, 9, 10, 121, -132, 117, -126], [2, 7]) == iaList%ToArray()), &
+        call assert_true(ALL(reshape([8, 16, 3, 4, 50, 60, 7, 8, 9, 10, 121, -132, 117, -126], [2, 7]) == iaList%ToArray()), &
             msg, success)
 
         call cList%Append('123')

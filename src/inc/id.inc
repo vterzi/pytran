@@ -82,28 +82,28 @@
 #    define _SIZE1(X) 1
 #  else
 #    define _DIM_LABEL1 _CAT(D,_DIM1)
-#    define _SIZE1(X) SIZE(X)
+#    define _SIZE1(X) size(X)
 #    if _DIM1 == 1
 #      define _DIM_EMPTY1 dimension(:)
-#      define _DIM_AS1(X) dimension(SIZE(X,1))
+#      define _DIM_AS1(X) dimension(size(X,1))
 #    elif _DIM1 == 2
 #      define _DIM_EMPTY1 dimension(:,:)
-#      define _DIM_AS1(X) dimension(SIZE(X,1),SIZE(X,2))
+#      define _DIM_AS1(X) dimension(size(X,1),size(X,2))
 #    elif _DIM1 == 3
 #      define _DIM_EMPTY1 dimension(:,:,:)
-#      define _DIM_AS1(X) dimension(SIZE(X,1),SIZE(X,2),SIZE(X,3))
+#      define _DIM_AS1(X) dimension(size(X,1),size(X,2),size(X,3))
 #    elif _DIM1 == 4
 #      define _DIM_EMPTY1 dimension(:,:,:,:)
-#      define _DIM_AS1(X) dimension(SIZE(X,1),SIZE(X,2),SIZE(X,3),SIZE(X,4))
+#      define _DIM_AS1(X) dimension(size(X,1),size(X,2),size(X,3),size(X,4))
 #    elif _DIM1 == 5
 #      define _DIM_EMPTY1 dimension(:,:,:,:,:)
-#      define _DIM_AS1(X) dimension(SIZE(X,1),SIZE(X,2),SIZE(X,3),SIZE(X,4),SIZE(X,5))
+#      define _DIM_AS1(X) dimension(size(X,1),size(X,2),size(X,3),size(X,4),size(X,5))
 #    elif _DIM1 == 6
 #      define _DIM_EMPTY1 dimension(:,:,:,:,:,:)
-#      define _DIM_AS1(X) dimension(SIZE(X,1),SIZE(X,2),SIZE(X,3),SIZE(X,4),SIZE(X,5),SIZE(X,6))
+#      define _DIM_AS1(X) dimension(size(X,1),size(X,2),size(X,3),size(X,4),size(X,5),size(X,6))
 #    elif _DIM1 == 7
 #      define _DIM_EMPTY1 dimension(:,:,:,:,:,:,:)
-#      define _DIM_AS1(X) dimension(SIZE(X,1),SIZE(X,2),SIZE(X,3),SIZE(X,4),SIZE(X,5),SIZE(X,6),SIZE(X,7))
+#      define _DIM_AS1(X) dimension(size(X,1),size(X,2),size(X,3),size(X,4),size(X,5),size(X,6),size(X,7))
 #    else
 #      error The value of the argument `_DIM1` out of range (0..7)
 #    endif
@@ -133,14 +133,14 @@
 #      define _ARG_TYPE1 _TYPE_LEN1(*), _DIM_EMPTY1
 #      define _ALLOC_TYPE1 _TYPE_LEN1(:), _DIM_EMPTY1, allocatable
 #      define _ELEM_TYPE1 _TYPE_LEN1(:), allocatable
-#      define _TYPE_AS1(X) _TYPE_LEN1(LEN(X)), _DIM_AS1(X)
-#      define _EQ1(X,Y) ALL(X == Y)
-#      define _NE1(X,Y) ANY(X /= Y)
+#      define _TYPE_AS1(X) _TYPE_LEN1(len(X)), _DIM_AS1(X)
+#      define _EQ1(X,Y) all(X == Y)
+#      define _NE1(X,Y) any(X /= Y)
 #    else
 #      define _ARG_TYPE1 _TYPE_LEN1(*)
 #      define _ALLOC_TYPE1 _TYPE_LEN1(:), allocatable
 #      define _ELEM_TYPE1 _ALLOC_TYPE1
-#      define _TYPE_AS1(X) _TYPE_LEN1(LEN(X))
+#      define _TYPE_AS1(X) _TYPE_LEN1(len(X))
 #      define _EQ1(X,Y) X == Y
 #      define _NE1(X,Y) X /= Y
 #    endif
@@ -214,11 +214,11 @@
 #      define _TYPE_LEN1(X) _ALLOC_TYPE1
 #      define _TYPE_AS1(X) _ELEM_TYPE1, _DIM_AS1(X)
 #      ifdef _NUMBER1
-#        define _EQ1(X,Y) ALL(X == Y)
-#        define _NE1(X,Y) ANY(X /= Y)
+#        define _EQ1(X,Y) all(X == Y)
+#        define _NE1(X,Y) any(X /= Y)
 #      else
-#        define _EQ1(X,Y) ALL(X .eqv. Y)
-#        define _NE1(X,Y) ANY(X .neqv. Y)
+#        define _EQ1(X,Y) all(X .eqv. Y)
+#        define _NE1(X,Y) any(X .neqv. Y)
 #      endif
 #    else
 #      define _ARG_TYPE1 _ELEM_TYPE1
@@ -262,28 +262,28 @@
 #    define _SIZE2(X) 1
 #  else
 #    define _DIM_LABEL2 _CAT(D,_DIM2)
-#    define _SIZE2(X) SIZE(X)
+#    define _SIZE2(X) size(X)
 #    if _DIM2 == 1
 #      define _DIM_EMPTY2 dimension(:)
-#      define _DIM_AS2(X) dimension(SIZE(X,1))
+#      define _DIM_AS2(X) dimension(size(X,1))
 #    elif _DIM2 == 2
 #      define _DIM_EMPTY2 dimension(:,:)
-#      define _DIM_AS2(X) dimension(SIZE(X,1),SIZE(X,2))
+#      define _DIM_AS2(X) dimension(size(X,1),size(X,2))
 #    elif _DIM2 == 3
 #      define _DIM_EMPTY2 dimension(:,:,:)
-#      define _DIM_AS2(X) dimension(SIZE(X,1),SIZE(X,2),SIZE(X,3))
+#      define _DIM_AS2(X) dimension(size(X,1),size(X,2),size(X,3))
 #    elif _DIM2 == 4
 #      define _DIM_EMPTY2 dimension(:,:,:,:)
-#      define _DIM_AS2(X) dimension(SIZE(X,1),SIZE(X,2),SIZE(X,3),SIZE(X,4))
+#      define _DIM_AS2(X) dimension(size(X,1),size(X,2),size(X,3),size(X,4))
 #    elif _DIM2 == 5
 #      define _DIM_EMPTY2 dimension(:,:,:,:,:)
-#      define _DIM_AS2(X) dimension(SIZE(X,1),SIZE(X,2),SIZE(X,3),SIZE(X,4),SIZE(X,5))
+#      define _DIM_AS2(X) dimension(size(X,1),size(X,2),size(X,3),size(X,4),size(X,5))
 #    elif _DIM2 == 6
 #      define _DIM_EMPTY2 dimension(:,:,:,:,:,:)
-#      define _DIM_AS2(X) dimension(SIZE(X,1),SIZE(X,2),SIZE(X,3),SIZE(X,4),SIZE(X,5),SIZE(X,6))
+#      define _DIM_AS2(X) dimension(size(X,1),size(X,2),size(X,3),size(X,4),size(X,5),size(X,6))
 #    elif _DIM2 == 7
 #      define _DIM_EMPTY2 dimension(:,:,:,:,:,:,:)
-#      define _DIM_AS2(X) dimension(SIZE(X,1),SIZE(X,2),SIZE(X,3),SIZE(X,4),SIZE(X,5),SIZE(X,6),SIZE(X,7))
+#      define _DIM_AS2(X) dimension(size(X,1),size(X,2),size(X,3),size(X,4),size(X,5),size(X,6),size(X,7))
 #    else
 #      error The value of the argument `_DIM2` out of range (0..7)
 #    endif
@@ -313,14 +313,14 @@
 #      define _ARG_TYPE2 _TYPE_LEN2(*), _DIM_EMPTY2
 #      define _ALLOC_TYPE2 _TYPE_LEN2(:), _DIM_EMPTY2, allocatable
 #      define _ELEM_TYPE2 _TYPE_LEN2(:), allocatable
-#      define _TYPE_AS2(X) _TYPE_LEN2(LEN(X)), _DIM_AS2(X)
-#      define _EQ2(X,Y) ALL(X == Y)
-#      define _NE2(X,Y) ANY(X /= Y)
+#      define _TYPE_AS2(X) _TYPE_LEN2(len(X)), _DIM_AS2(X)
+#      define _EQ2(X,Y) all(X == Y)
+#      define _NE2(X,Y) any(X /= Y)
 #    else
 #      define _ARG_TYPE2 _TYPE_LEN2(*)
 #      define _ALLOC_TYPE2 _TYPE_LEN2(:), allocatable
 #      define _ELEM_TYPE2 _ALLOC_TYPE2
-#      define _TYPE_AS2(X) _TYPE_LEN2(LEN(X))
+#      define _TYPE_AS2(X) _TYPE_LEN2(len(X))
 #      define _EQ2(X,Y) X == Y
 #      define _NE2(X,Y) X /= Y
 #    endif
@@ -394,11 +394,11 @@
 #      define _TYPE_LEN2(X) _ALLOC_TYPE2
 #      define _TYPE_AS2(X) _ELEM_TYPE2, _DIM_AS2(X)
 #      ifdef _NUMBER2
-#        define _EQ2(X,Y) ALL(X == Y)
-#        define _NE2(X,Y) ANY(X /= Y)
+#        define _EQ2(X,Y) all(X == Y)
+#        define _NE2(X,Y) any(X /= Y)
 #      else
-#        define _EQ2(X,Y) ALL(X .eqv. Y)
-#        define _NE2(X,Y) ANY(X .neqv. Y)
+#        define _EQ2(X,Y) all(X .eqv. Y)
+#        define _NE2(X,Y) any(X .neqv. Y)
 #      endif
 #    else
 #      define _ARG_TYPE2 _ELEM_TYPE2
@@ -507,25 +507,25 @@
 #    define _DIM_LABEL _CAT(D,_DIM)
 #    if _DIM == 1
 #      define _DIM_EMPTY dimension(:)
-#      define _DIM_AS(X) dimension(SIZE(X,1))
+#      define _DIM_AS(X) dimension(size(X,1))
 #    elif _DIM == 2
 #      define _DIM_EMPTY dimension(:,:)
-#      define _DIM_AS(X) dimension(SIZE(X,1),SIZE(X,2))
+#      define _DIM_AS(X) dimension(size(X,1),size(X,2))
 #    elif _DIM == 3
 #      define _DIM_EMPTY dimension(:,:,:)
-#      define _DIM_AS(X) dimension(SIZE(X,1),SIZE(X,2),SIZE(X,3))
+#      define _DIM_AS(X) dimension(size(X,1),size(X,2),size(X,3))
 #    elif _DIM == 4
 #      define _DIM_EMPTY dimension(:,:,:,:)
-#      define _DIM_AS(X) dimension(SIZE(X,1),SIZE(X,2),SIZE(X,3),SIZE(X,4))
+#      define _DIM_AS(X) dimension(size(X,1),size(X,2),size(X,3),size(X,4))
 #    elif _DIM == 5
 #      define _DIM_EMPTY dimension(:,:,:,:,:)
-#      define _DIM_AS(X) dimension(SIZE(X,1),SIZE(X,2),SIZE(X,3),SIZE(X,4),SIZE(X,5))
+#      define _DIM_AS(X) dimension(size(X,1),size(X,2),size(X,3),size(X,4),size(X,5))
 #    elif _DIM == 6
 #      define _DIM_EMPTY dimension(:,:,:,:,:,:)
-#      define _DIM_AS(X) dimension(SIZE(X,1),SIZE(X,2),SIZE(X,3),SIZE(X,4),SIZE(X,5),SIZE(X,6))
+#      define _DIM_AS(X) dimension(size(X,1),size(X,2),size(X,3),size(X,4),size(X,5),size(X,6))
 #    elif _DIM == 7
 #      define _DIM_EMPTY dimension(:,:,:,:,:,:,:)
-#      define _DIM_AS(X) dimension(SIZE(X,1),SIZE(X,2),SIZE(X,3),SIZE(X,4),SIZE(X,5),SIZE(X,6),SIZE(X,7))
+#      define _DIM_AS(X) dimension(size(X,1),size(X,2),size(X,3),size(X,4),size(X,5),size(X,6),size(X,7))
 #    else
 #      error The value of the argument `_DIM` out of range (0..7)
 #    endif
@@ -555,14 +555,14 @@
 #      define _ARG_TYPE _TYPE_LEN(*), _DIM_EMPTY
 #      define _ALLOC_TYPE _TYPE_LEN(:), _DIM_EMPTY, allocatable
 #      define _ELEM_TYPE _TYPE_LEN(:), allocatable
-#      define _TYPE_AS(X) _TYPE_LEN(LEN(X)), _DIM_AS(X)
-#      define _EQ(X,Y) ALL(X == Y)
-#      define _NE(X,Y) ANY(X /= Y)
+#      define _TYPE_AS(X) _TYPE_LEN(len(X)), _DIM_AS(X)
+#      define _EQ(X,Y) all(X == Y)
+#      define _NE(X,Y) any(X /= Y)
 #    else
 #      define _ARG_TYPE _TYPE_LEN(*)
 #      define _ALLOC_TYPE _TYPE_LEN(:), allocatable
 #      define _ELEM_TYPE _ALLOC_TYPE
-#      define _TYPE_AS(X) _TYPE_LEN(LEN(X))
+#      define _TYPE_AS(X) _TYPE_LEN(len(X))
 #      define _EQ(X,Y) X == Y
 #      define _NE(X,Y) X /= Y
 #    endif
@@ -636,11 +636,11 @@
 #      define _TYPE_LEN(X) _ALLOC_TYPE
 #      define _TYPE_AS(X) _ELEM_TYPE, _DIM_AS(X)
 #      ifdef _NUMBER
-#        define _EQ(X,Y) ALL(X == Y)
-#        define _NE(X,Y) ANY(X /= Y)
+#        define _EQ(X,Y) all(X == Y)
+#        define _NE(X,Y) any(X /= Y)
 #      else
-#        define _EQ(X,Y) ALL(X .eqv. Y)
-#        define _NE(X,Y) ANY(X .neqv. Y)
+#        define _EQ(X,Y) all(X .eqv. Y)
+#        define _NE(X,Y) any(X .neqv. Y)
 #      endif
 #    else
 #      define _ARG_TYPE _ELEM_TYPE

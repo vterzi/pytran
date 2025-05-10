@@ -101,10 +101,10 @@ contains
 
         integer :: length, status
 
-        call GET_COMMAND(length=length)
+        call get_command(length=length)
         allocate(character(len=length) :: val)
-        call GET_COMMAND(val, status=status)
-        if (PRESENT(success)) success = status == 0
+        call get_command(val, status=status)
+        if (present(success)) success = status == 0
     end function getcmd
 
 
@@ -115,10 +115,10 @@ contains
 
         integer :: length, status
 
-        call GET_COMMAND_ARGUMENT(number, length=length)
+        call get_command_argument(number, length=length)
         allocate(character(len=length) :: val)
-        call GET_COMMAND_ARGUMENT(number, val, status=status)
-        if (PRESENT(success)) success = status == 0
+        call get_command_argument(number, val, status=status)
+        if (present(success)) success = status == 0
     end function getcmdarg
 
 
@@ -129,9 +129,9 @@ contains
 
         integer :: length, status
 
-        call GET_ENVIRONMENT_VARIABLE(name, length=length)
+        call get_environment_variable(name, length=length)
         allocate(character(len=length) :: val)
-        call GET_ENVIRONMENT_VARIABLE(name, val, status=status)
-        if (PRESENT(success)) success = status == 0
+        call get_environment_variable(name, val, status=status)
+        if (present(success)) success = status == 0
     end function getenv
 end module stdlib_base

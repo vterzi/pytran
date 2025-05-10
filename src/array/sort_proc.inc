@@ -15,9 +15,9 @@ pure recursive subroutine _SUBPROC(array)
     _ARG_TYPE, intent(inout) :: array(:)
 
     integer :: length, low, high
-    _TYPE_LEN(LEN(array)) :: pivot
+    _TYPE_LEN(len(array)) :: pivot
 
-    length = SIZE(array)
+    length = size(array)
     if (length <= SIMPLE_SORT_SIZE) then  ! interchange sort
         do low = 1, length - 1
             do high = low + 1, length

@@ -10,7 +10,7 @@ pure subroutine _PROC(array, back)
     logical :: back_
 
     back_ = .false.
-    if (PRESENT(back)) back_ = back
+    if (present(back)) back_ = back
 
     if (back_) then
         call sort_back(array)
@@ -33,7 +33,7 @@ end subroutine _PROC
 pure function _PROC(array, back) result(res)
     _ARG_TYPE, intent(in) :: array(:)
     logical, intent(in), optional :: back
-    _TYPE_LEN(LEN(array)) :: res(SIZE(array))
+    _TYPE_LEN(len(array)) :: res(size(array))
 
     res = array
     call sort(res, back)

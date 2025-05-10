@@ -5,7 +5,7 @@
 #  define _OUT_TYPE _IN_TYPE
 #  define _OUT_TYPE_ARR _ELEM_TYPE, dimension(this%dimension_, this%size_)
 #  define _ARR_IDX(X) :, X
-#  define _ARR_SIZE(X) SIZE(X, 2)
+#  define _ARR_SIZE(X) size(X, 2)
 #elif _TYPE == _CHARACTER
 #  define _ARRAY_LABEL
 #  define _IN_TYPE _ARG_TYPE
@@ -13,7 +13,7 @@
 #  define _OUT_TYPE _ELEM_TYPE
 #  define _OUT_TYPE_ARR _OUT_TYPE, dimension(:)
 #  define _ARR_IDX(X) X
-#  define _ARR_SIZE(X) SIZE(X)
+#  define _ARR_SIZE(X) size(X)
 #else
 #  define _ARRAY_LABEL
 #  define _IN_TYPE _ARG_TYPE
@@ -21,17 +21,17 @@
 #  define _OUT_TYPE _IN_TYPE
 #  define _OUT_TYPE_ARR _OUT_TYPE, dimension(this%size_)
 #  define _ARR_IDX(X) X
-#  define _ARR_SIZE(X) SIZE(X)
+#  define _ARR_SIZE(X) size(X)
 #endif
 
 #if _TYPE == _LOGICAL
 #  ifndef _ARRAY
 #    define _EQUAL(X,Y) X .eqv. Y
 #  else
-#    define _EQUAL(X,Y) ALL(X .eqv. Y)
+#    define _EQUAL(X,Y) all(X .eqv. Y)
 #  endif
 #elif defined(_NUMBER) & defined(_ARRAY)
-#  define _EQUAL(X,Y) ALL(X == Y)
+#  define _EQUAL(X,Y) all(X == Y)
 #else
 #  define _EQUAL(X,Y) X == Y
 #endif
@@ -45,7 +45,7 @@ function _CONSTRUCTOR(_ITER)(list, idx) result(this)
     integer :: idx_
 
     idx_ = 1
-    if (PRESENT(idx)) idx_ = idx
+    if (present(idx)) idx_ = idx
 
 #ifdef _ARRAY
     this%dimension_ = list%Dimension()
@@ -58,7 +58,7 @@ pure function _PROC(_ITER,Get)(this) result(val)
     class(_ITER), intent(in) :: this
     _OUT_TYPE :: val
 
-    if (.not. ASSOCIATED(this%node)) error stop 'end of list reached'
+    if (.not. associated(this%node)) error stop 'end of list reached'
     val = this%node%val
 end function _PROC(_ITER,Get)
 
@@ -67,7 +67,7 @@ subroutine _PROC(_ITER,Set)(this, val)
     class(_ITER), intent(in) :: this
     _IN_TYPE :: val
 
-    if (.not. ASSOCIATED(this%node)) error stop 'end of list reached'
+    if (.not. associated(this%node)) error stop 'end of list reached'
     this%node%val = val
 end subroutine _PROC(_ITER,Set)
 
@@ -75,7 +75,7 @@ end subroutine _PROC(_ITER,Set)
 subroutine _PROC(_ITER,Step)(this)
     class(_ITER), intent(inout) :: this
 
-    if (.not. ASSOCIATED(this%node)) error stop 'end of list reached'
+    if (.not. associated(this%node)) error stop 'end of list reached'
     this%node => this%node%next
 end subroutine _PROC(_ITER,Step)
 
@@ -84,7 +84,7 @@ function _PROC(_ITER,Next)(this) result(val)
     class(_ITER), intent(inout) :: this
     _OUT_TYPE :: val
 
-    if (.not. ASSOCIATED(this%node)) error stop 'end of list reached'
+    if (.not. associated(this%node)) error stop 'end of list reached'
     val = this%node%val
     this%node => this%node%next
 end function _PROC(_ITER,Next)
@@ -127,7 +127,7 @@ function _PROC(_LIST,Len)(this) result(maxLen)
     maxLen = 0
     node => this%first
     do i = 1, this%size_
-        newLen = LEN(node%val)
+        newLen = len(node%val)
         if (maxLen < newLen) maxLen = newLen
         node => node%next
     end do
@@ -253,7 +253,7 @@ subroutine _SUBPROC(_LIST,Delete,Slice)(this, first, last, step)
     type(_NODE), pointer :: deleted, node, zeroth
 
     step_ = 1
-    if (PRESENT(step)) step_ = step
+    if (present(step)) step_ = step
 
     first_ = this%Index(first)
     last_ = this%Index(last)
@@ -367,7 +367,7 @@ function _PROC(_LIST,Find)(this, val, back) result(idx)
     type(_NODE), pointer :: node
 
     back_ = .false.
-    if (PRESENT(back)) back_ = back
+    if (present(back)) back_ = back
 
     idx = 0
     node => this%first

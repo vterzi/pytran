@@ -5,11 +5,11 @@ subroutine _PROC(expr, msg, success)
     logical, intent(inout), optional :: success
 
     if (.not. expr) then
-        if (PRESENT(msg)) then
+        if (present(msg)) then
             write(*, *) msg
         end if
         write(*, *) expr, 'is not true'
-        if (PRESENT(success)) then
+        if (present(success)) then
             success = success .and. .false.
         else
             stop 1
@@ -26,11 +26,11 @@ subroutine _PROC(expr, msg, success)
     logical, intent(inout), optional :: success
 
     if (expr) then
-        if (PRESENT(msg)) then
+        if (present(msg)) then
             write(*, *) msg
         end if
         write(*, *) expr, 'is not false'
-        if (PRESENT(success)) then
+        if (present(success)) then
             success = success .and. .false.
         else
             stop 1

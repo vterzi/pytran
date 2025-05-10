@@ -5,11 +5,11 @@ subroutine _PROC(first, second, msg, success)
     logical, intent(inout), optional :: success
 
     if (.not. (_EQ(first, second))) then
-        if (PRESENT(msg)) then
+        if (present(msg)) then
             write(*, *) msg
         end if
         write(*, *) first, '/=', second
-        if (PRESENT(success)) then
+        if (present(success)) then
             success = success .and. .false.
         else
             stop 1
@@ -26,11 +26,11 @@ subroutine _PROC(first, second, msg, success)
     logical, intent(inout), optional :: success
 
     if (.not. (_NE(first, second))) then
-        if (PRESENT(msg)) then
+        if (present(msg)) then
             write(*, *) msg
         end if
         write(*, *) first, '==', second
-        if (PRESENT(success)) then
+        if (present(success)) then
             success = success .and. .false.
         else
             stop 1
@@ -48,11 +48,11 @@ subroutine _PROC(first, second, msg, success)
     logical, intent(inout), optional :: success
 
     if (.not. (first > second)) then
-        if (PRESENT(msg)) then
+        if (present(msg)) then
             write(*, *) msg
         end if
         write(*, *) first, '<=', second
-        if (PRESENT(success)) then
+        if (present(success)) then
             success = success .and. .false.
         else
             stop 1
@@ -69,11 +69,11 @@ subroutine _PROC(first, second, msg, success)
     logical, intent(inout), optional :: success
 
     if (.not. (first >= second)) then
-        if (PRESENT(msg)) then
+        if (present(msg)) then
             write(*, *) msg
         end if
         write(*, *) first, '<', second
-        if (PRESENT(success)) then
+        if (present(success)) then
             success = success .and. .false.
         else
             stop 1
@@ -90,11 +90,11 @@ subroutine _PROC(first, second, msg, success)
     logical, intent(inout), optional :: success
 
     if (.not. (first < second)) then
-        if (PRESENT(msg)) then
+        if (present(msg)) then
             write(*, *) msg
         end if
         write(*, *) first, '>=', second
-        if (PRESENT(success)) then
+        if (present(success)) then
             success = success .and. .false.
         else
             stop 1
@@ -111,11 +111,11 @@ subroutine _PROC(first, second, msg, success)
     logical, intent(inout), optional :: success
 
     if (.not. (first <= second)) then
-        if (PRESENT(msg)) then
+        if (present(msg)) then
             write(*, *) msg
         end if
         write(*, *) first, '>', second
-        if (PRESENT(success)) then
+        if (present(success)) then
             success = success .and. .false.
         else
             stop 1
