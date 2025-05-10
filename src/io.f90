@@ -1,17 +1,41 @@
 module stdlib_io
     use, intrinsic :: iso_fortran_env, only: IOSTAT_END, IOSTAT_EOR
     use stdlib_kinds
-    use stdlib_string, only: LF, WHITESPACE, strip
+    use stdlib_string, only: LF, WHITESPACE, strip, WORDCHARS
     use stdlib_list, only: CharacterList
 
     implicit none
 
     private
-    public :: read_line, read_unit, read_file, split_lines, split, tokenize
+    public :: tmp_filename, read_line, read_unit, read_file, split_lines, &
+        split, tokenize
 
     integer, parameter :: LEN_BUFFER = 256
 
 contains
+    function tmp_filename() result(filename)
+        integer, parameter :: LEN_STEM = 8
+        character(len=*), parameter :: EXT = '.tmp'
+        character(len=(LEN_STEM + len(EXT))) :: filename
+
+        logical :: exist
+        integer :: i, idx
+        real :: nums(LEN_STEM)
+        character(len=LEN_STEM) :: stem
+
+        exist = .true.
+        do while(exist)
+            call random_number(nums)
+            do i = 1, LEN_STEM
+                idx = int(nums(i) * len(WORDCHARS)) + 1
+                stem(i:i) = WORDCHARS(idx:idx)
+            end do
+            filename = stem // EXT
+            inquire(file=filename, exist=exist)
+        end do
+    end function tmp_filename
+
+
     subroutine read_line(unit, line, eof, success)
         integer, intent(in) :: unit
         logical, intent(out), optional :: eof, success
