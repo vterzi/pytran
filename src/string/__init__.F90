@@ -2,9 +2,6 @@
 
 
 module stdlib_string
-    use, intrinsic :: iso_c_binding, only: &
-        C_NULL_CHAR, C_ALERT, C_BACKSPACE, C_HORIZONTAL_TAB, C_NEW_LINE, &
-        C_VERTICAL_TAB, C_FORM_FEED, C_CARRIAGE_RETURN
     use stdlib_kinds
     use stdlib_base, only: assign_optional
     use stdlib_math, only: dec_digits, dec_exponent
@@ -13,8 +10,6 @@ module stdlib_string
 
     private
     public :: &
-        C_NULL_CHAR, C_ALERT, C_BACKSPACE, C_HORIZONTAL_TAB, C_NEW_LINE, &
-        C_VERTICAL_TAB, C_FORM_FEED, C_CARRIAGE_RETURN, &
         isspace, isdigit, isdecimal, isnumeric, isalpha, isalnum, &
         isidentifier, isprintable, isascii, isupper, islower, &
         upper, lower, casefold, capitalize, strip, center, startswith, endswith
