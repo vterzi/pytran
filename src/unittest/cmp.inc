@@ -1,4 +1,4 @@
-#define _PROC _CAT(assert_equal_,_LABEL)
+#define _PROC _(assert_equal_)_(_LABEL)
 subroutine _PROC(first, second, msg, success)
     _ARG_TYPE, intent(in) :: first, second
     character(len=*), intent(in), optional :: msg
@@ -19,7 +19,7 @@ end subroutine _PROC
 #undef _PROC
 
 
-#define _PROC _CAT(assert_not_equal_,_LABEL)
+#define _PROC _(assert_not_equal_)_(_LABEL)
 subroutine _PROC(first, second, msg, success)
     _ARG_TYPE, intent(in) :: first, second
     character(len=*), intent(in), optional :: msg
@@ -41,7 +41,7 @@ end subroutine _PROC
 
 
 #if _TYPE == _INTEGER | _TYPE == _REAL | _TYPE == _CHARACTER
-#  define _PROC _CAT(assert_greater_,_LABEL)
+#  define _PROC _(assert_greater_)_(_LABEL)
 subroutine _PROC(first, second, msg, success)
     _ARG_TYPE, intent(in) :: first, second
     character(len=*), intent(in), optional :: msg
@@ -62,7 +62,7 @@ end subroutine _PROC
 #  undef _PROC
 
 
-#  define _PROC _CAT(assert_greater_equal_,_LABEL)
+#  define _PROC _(assert_greater_equal_)_(_LABEL)
 subroutine _PROC(first, second, msg, success)
     _ARG_TYPE, intent(in) :: first, second
     character(len=*), intent(in), optional :: msg
@@ -83,7 +83,7 @@ end subroutine _PROC
 #  undef _PROC
 
 
-#  define _PROC _CAT(assert_less_,_LABEL)
+#  define _PROC _(assert_less_)_(_LABEL)
 subroutine _PROC(first, second, msg, success)
     _ARG_TYPE, intent(in) :: first, second
     character(len=*), intent(in), optional :: msg
@@ -104,7 +104,7 @@ end subroutine _PROC
 #  undef _PROC
 
 
-#  define _PROC _CAT(assert_less_equal_,_LABEL)
+#  define _PROC _(assert_less_equal_)_(_LABEL)
 subroutine _PROC(first, second, msg, success)
     _ARG_TYPE, intent(in) :: first, second
     character(len=*), intent(in), optional :: msg

@@ -1,4 +1,4 @@
-#define _PROC _CAT(assert_true_,_LABEL)
+#define _PROC _(assert_true_)_(_LABEL)
 subroutine _PROC(expr, msg, success)
     _ARG_TYPE, intent(in) :: expr
     character(len=*), intent(in), optional :: msg
@@ -19,7 +19,7 @@ end subroutine _PROC
 #undef _PROC
 
 
-#define _PROC _CAT(assert_false_,_LABEL)
+#define _PROC _(assert_false_)_(_LABEL)
 subroutine _PROC(expr, msg, success)
     _ARG_TYPE, intent(in) :: expr
     character(len=*), intent(in), optional :: msg

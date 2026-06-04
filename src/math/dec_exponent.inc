@@ -1,8 +1,8 @@
 ! {"id.inc"(_ID)} + () -(_PROC, _ARR)> ()
 ! Define functions that determine the decimal exponent of real numbers.
 
-#define _ARR _CAT3(REAL_,_KIND_LABEL,_DEC_POWERS)
-#define _PROC _CAT(dec_exponent_,_LABEL)
+#define _ARR _(REAL_)_(_KIND_LABEL)_(_DEC_POWERS)
+#define _PROC _(dec_exponent_)_(_LABEL)
 elemental function _PROC(num) result(res)
     _ARG_TYPE, intent(in) :: num
     integer :: res
@@ -13,7 +13,7 @@ elemental function _PROC(num) result(res)
     n = abs(num)
     if (n == 0) then
         res = -huge(res)
-    else if (n == _CAT3(REAL_,_KIND_LABEL,_INF)) then
+    else if (n == _(REAL_)_(_KIND_LABEL)_(_INF)) then
         res = huge(res)
     else
         res = 0

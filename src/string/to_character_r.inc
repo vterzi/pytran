@@ -2,7 +2,7 @@
 ! Define conversion functions from the real type to the character type.
 
 
-#define _PROC _CAT(to_character_,_LABEL)
+#define _PROC _(to_character_)_(_LABEL)
 pure function _PROC(arg, mode, width, decimals, expwidth, sign) result(res)
     _ARG_TYPE, intent(in) :: arg
     integer, intent(in), optional :: mode, width, decimals, expwidth
@@ -15,7 +15,7 @@ pure function _PROC(arg, mode, width, decimals, expwidth, sign) result(res)
     character(len=2) :: mode_str
     character(len=MAX_LEN_INTEGER_STR) :: width_str, decimals_str, expwidth_str
     character(len=3) :: sign_str
-    character(len=_CAT3(MAX_LEN_REAL_,_KIND_LABEL,_STR)) :: buffer
+    character(len=_(MAX_LEN_REAL_)_(_KIND_LABEL)_(_STR)) :: buffer
 
     present_mode = present(mode)
     present_width = present(width)
@@ -68,7 +68,7 @@ pure function _PROC(arg, mode, width, decimals, expwidth, sign) result(res)
         if (present_decimals) then
             decimals_ = max(0, decimals)
         else
-            decimals_ = _CAT3(REAL_,_KIND_LABEL,_DEC_DIGITS)
+            decimals_ = _(REAL_)_(_KIND_LABEL)_(_DEC_DIGITS)
         end if
         write(decimals_str, *) decimals_
         if (present_expwidth) then
@@ -76,7 +76,7 @@ pure function _PROC(arg, mode, width, decimals, expwidth, sign) result(res)
             write(expwidth_str, *) expwidth_
             expwidth_str = 'e' // adjustl(expwidth_str)
         else
-            expwidth_ = _CAT3(REAL_,_KIND_LABEL,_EXP_WIDTH)
+            expwidth_ = _(REAL_)_(_KIND_LABEL)_(_EXP_WIDTH)
             expwidth_str = ''
         end if
         if (present_width) then

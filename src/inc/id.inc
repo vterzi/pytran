@@ -51,7 +51,7 @@
 !   * `_DIM_LABEL?`: dimension label,
 !   * `_LABEL?`: combined label of type, kind, and dimension.
 
-#include "../inc/cat.inc"
+#define _(X) X
 
 #undef _KIND_MASK
 #define _KIND_MASK ((1 << _KIND_BITS) - 1)
@@ -280,7 +280,7 @@
 #      define _NE1(X,Y) X/=Y
 #    endif
 #  endif
-#  define _LABEL1 _CAT3(_TYPE_LABEL1,_DIM_LABEL1,_KIND_LABEL1)
+#  define _LABEL1 _(_TYPE_LABEL1)_(_DIM_LABEL1)_(_KIND_LABEL1)
 #  undef _TYPE_ID2
 #  undef _KIND_ID2
 #  undef _DIM_ID2
@@ -458,7 +458,7 @@
 #      define _NE2(X,Y) X/=Y
 #    endif
 #  endif
-#  define _LABEL2 _CAT3(_TYPE_LABEL2,_DIM_LABEL2,_KIND_LABEL2)
+#  define _LABEL2 _(_TYPE_LABEL2)_(_DIM_LABEL2)_(_KIND_LABEL2)
 #  ifndef _KEEP_ARGS
 #    undef _ID1
 #    undef _ID2
@@ -642,7 +642,7 @@
 #      define _NE(X,Y) X/=Y
 #    endif
 #  endif
-#  define _LABEL _CAT3(_TYPE_LABEL,_DIM_LABEL,_KIND_LABEL)
+#  define _LABEL _(_TYPE_LABEL)_(_DIM_LABEL)_(_KIND_LABEL)
 #  ifndef _KEEP_ARGS
 #    undef _ID
 #  endif

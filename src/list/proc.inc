@@ -331,19 +331,19 @@ end subroutine _PROC(_LIST,Set)
 #    define _ARG_IN_TYPE _IN_TYPE
 #    include "../list/proc_op.inc"
 #  else
-#    define _PROC_SUFFIX _CAT(Add,Scalar)
+#    define _PROC_SUFFIX _(Add)_(Scalar)
 #    define _OP +
 #    define _ARG_IN_TYPE _ARG_TYPE
 #    include "../list/proc_op.inc"
-#    define _PROC_SUFFIX _CAT(Multiply,Scalar)
+#    define _PROC_SUFFIX _(Multiply)_(Scalar)
 #    define _OP *
 #    define _ARG_IN_TYPE _ARG_TYPE
 #    include "../list/proc_op.inc"
-#    define _PROC_SUFFIX _CAT(Add,Array)
+#    define _PROC_SUFFIX _(Add)_(Array)
 #    define _OP +
 #    define _ARG_IN_TYPE _IN_TYPE
 #    include "../list/proc_op.inc"
-#    define _PROC_SUFFIX _CAT(Multiply,Array)
+#    define _PROC_SUFFIX _(Multiply)_(Array)
 #    define _OP *
 #    define _ARG_IN_TYPE _IN_TYPE
 #    include "../list/proc_op.inc"

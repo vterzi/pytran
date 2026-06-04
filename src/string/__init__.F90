@@ -157,7 +157,7 @@ module stdlib_string
 
 #include "../inc/proc.inc"
 
-#define _DECL(X) public :: _CAT3(to_,_TYPE_NAME,X)
+#define _DECL(X) public :: _(to_)_(_TYPE_NAME)_(X)
 #define _ID _LOGICAL
 #define _DEFAULT
 #include "../inc/decl.inc"

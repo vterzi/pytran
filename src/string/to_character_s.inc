@@ -2,7 +2,7 @@
 ! Define conversion functions from the character type to the character type.
 
 
-#define _PROC _CAT(to_character_,_LABEL)
+#define _PROC _(to_character_)_(_LABEL)
 pure function _PROC(arg, width) result(res)
     _ARG_TYPE, intent(in) :: arg
     integer, intent(in), optional :: width

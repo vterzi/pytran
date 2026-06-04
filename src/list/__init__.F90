@@ -51,14 +51,14 @@
 !             position to the next list element
 
 
-#include "../inc/cat.inc"
+#define _(X) X
 
-#define _CONCAT(X,Y) _CAT3(X,_,Y)
-#define _NODE _CAT4(_TYPE_NAME,_KIND_LABEL,_ARRAY_LABEL,Node)
-#define _ITER _CAT4(_TYPE_NAME,_KIND_LABEL,_ARRAY_LABEL,Iter)
-#define _LIST _CAT4(_TYPE_NAME,_KIND_LABEL,_ARRAY_LABEL,List)
+#define _CONCAT(X,Y) _(X)_(_)_(Y)
+#define _NODE _(_TYPE_NAME)_(_KIND_LABEL)_(_ARRAY_LABEL)_(Node)
+#define _ITER _(_TYPE_NAME)_(_KIND_LABEL)_(_ARRAY_LABEL)_(Iter)
+#define _LIST _(_TYPE_NAME)_(_KIND_LABEL)_(_ARRAY_LABEL)_(List)
 #define _PROC(T,P) _CONCAT(T,P)
-#define _SUBPROC(T,P,X) _CAT4(T,_,P,X)
+#define _SUBPROC(T,P,X) _(T)_(_)_(P)_(X)
 #define _CONSTRUCTOR(T) _CONCAT(New,T)
 
 

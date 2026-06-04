@@ -2,7 +2,7 @@
 ! Define procedures for sorting arrays.
 
 
-#define _PROC _CAT(sort_,_LABEL)
+#define _PROC _(sort_)_(_LABEL)
 pure subroutine _PROC(array, back)
     _ARG_TYPE, intent(inout) :: array(:)
     logical, intent(in), optional :: back
@@ -29,7 +29,7 @@ end subroutine _PROC
 #undef _PROC
 
 
-#define _PROC _CAT(sorted_,_LABEL)
+#define _PROC _(sorted_)_(_LABEL)
 pure function _PROC(array, back) result(res)
     _ARG_TYPE, intent(in) :: array(:)
     logical, intent(in), optional :: back

@@ -2,7 +2,7 @@
 ! Define subroutines for swapping the values of two variables.
 
 
-#define _PROC _CAT(swap_,_LABEL)
+#define _PROC _(swap_)_(_LABEL)
 elemental subroutine _PROC(arg1, arg2)
     _ARG_TYPE, intent(inout) :: arg1, arg2
 

@@ -2,7 +2,7 @@
 ! Define functions that determine the number of decimal digits of integers.
 
 
-#define _PROC _CAT(dec_digits_,_LABEL)
+#define _PROC _(dec_digits_)_(_LABEL)
 elemental function _PROC(num) result(res)
     _ARG_TYPE, intent(in) :: num
     integer :: res

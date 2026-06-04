@@ -1,15 +1,15 @@
 procedure, private :: &
 #ifdef _ARG3
-        _CAT(_PREFIX,_ARG3), &
+        _(_PREFIX)_(_ARG3), &
 #endif
-        _CAT(_PREFIX,_ARG2), &
-        _CAT(_PREFIX,_ARG1)
+        _(_PREFIX)_(_ARG2), &
+        _(_PREFIX)_(_ARG1)
 generic :: _GENERIC_NAME => &
 #ifdef _ARG3
-        _CAT(_PREFIX,_ARG3), &
+        _(_PREFIX)_(_ARG3), &
 #endif
-        _CAT(_PREFIX,_ARG2), &
-        _CAT(_PREFIX,_ARG1)
+        _(_PREFIX)_(_ARG2), &
+        _(_PREFIX)_(_ARG1)
 
 
 #undef _PREFIX

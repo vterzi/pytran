@@ -2,7 +2,7 @@
 ! Define conversion functions from the integer type to the character type.
 
 
-#define _PROC _CAT(to_character_,_LABEL)
+#define _PROC _(to_character_)_(_LABEL)
 pure function _PROC(arg, width, minimum, sign) result(res)
     _ARG_TYPE, intent(in) :: arg
     integer, intent(in), optional :: width, minimum
@@ -13,7 +13,7 @@ pure function _PROC(arg, width, minimum, sign) result(res)
     integer :: width_
     character(len=MAX_LEN_INTEGER_STR) :: width_str, minimum_str
     character(len=3) :: sign_str
-    character(len=_CAT3(MAX_LEN_INTEGER_,_KIND_LABEL,_STR)) :: buffer
+    character(len=_(MAX_LEN_INTEGER_)_(_KIND_LABEL)_(_STR)) :: buffer
 
     present_width = present(width)
     present_minimum = present(minimum)

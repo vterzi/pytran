@@ -3,7 +3,7 @@
 ! types.
 
 
-#define _PROC _CAT3(to_,_TYPE_NAME,_KIND_LABEL)
+#define _PROC _(to_)_(_TYPE_NAME)_(_KIND_LABEL)
 elemental function _PROC(arg) result(res)
     character(len=*), intent(in) :: arg
     _ELEM_TYPE :: res
