@@ -223,6 +223,10 @@ module stdlib_string
 #define _ID2 _COMPLEX
 #define _DEFAULT_ONLY1
 #include "../inc/decls.inc"
+#if defined(_UCS4) & defined(_ASCII) & (_UCS4 != _ASCII)
+        module procedure :: sa_cat_su
+        module procedure :: su_cat_sa
+#endif
     end interface
 #undef _OP
 
@@ -359,6 +363,35 @@ contains
 #define _DEFAULT_ONLY1
 #include "../inc/defs.inc"
 #undef _FILE
+
+
+#if defined(_UCS4) & defined(_ASCII) & (_UCS4 != _ASCII)
+    function sa_cat_su(arg1, arg2) result(res)
+        character(len=*, kind=_ASCII), intent(in) :: arg1
+        character(len=*, kind=_UCS4), intent(in) :: arg2
+        character(len=(len(arg1) + len(arg2)), kind=_UCS4) :: res
+
+        integer :: i
+
+        i = len(arg1)
+        res(:i) = arg1
+        res(i + 1 :) = arg2
+    end function sa_cat_su
+
+
+    function su_cat_sa(arg1, arg2) result(res)
+        character(len=*, kind=_UCS4), intent(in) :: arg1
+        character(len=*, kind=_ASCII), intent(in) :: arg2
+        character(len=(len(arg1) + len(arg2)), kind=_UCS4) :: res
+
+        integer :: i
+
+        i = len(arg1)
+        res(:i) = arg1
+        res(i + 1 :) = arg2
+    end function su_cat_sa
+#endif
+
 
 #define _FILE "../string/add_s.inc"
 #define _ID _CHARACTER
