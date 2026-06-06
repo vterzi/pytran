@@ -1,4 +1,3 @@
-include(CTest)
 file(GLOB_RECURSE sources "*.f90" "*.F90")
 foreach(source ${sources})
     get_filename_component(label "${source}" NAME_WE)

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.14.0)
+cmake_minimum_required(VERSION 3.3.2)
 
 project(stdlib
     LANGUAGES Fortran
@@ -15,4 +15,16 @@ include(cmake/kinds.cmake)
 include(cmake/props.cmake)
 
 add_subdirectory(src)
-add_subdirectory(tests)
+if(${BUILD_TESTING})
+    include(CTest)
+    add_subdirectory(tests)
+endif()
+
+install(TARGETS stdlib
+    ARCHIVE DESTINATION lib
+    LIBRARY DESTINATION lib
+)
+install(DIRECTORY "${PROJECT_BINARY_DIR}/include"
+    DESTINATION .
+    FILES_MATCHING PATTERN "*.mod"
+)
