@@ -74,6 +74,7 @@ function _PROC(self, s) result(list)
         idx = lo
         lo = lo - ((lo - up) / st) * st
         up = idx
+        node => self%first
         idx = 1
         do while (idx < lo)
             node => node%next
