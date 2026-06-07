@@ -1,0 +1,5 @@
+#define _LOGICAL (1 << (_KIND_BITS))
+#define _INTEGER (1 << (_KIND_BITS + 1))
+#define _REAL (1 << (_KIND_BITS + 2))
+#define _COMPLEX (1 << (_KIND_BITS + 3))
+#define _CHARACTER (1 << (_KIND_BITS + 4))
