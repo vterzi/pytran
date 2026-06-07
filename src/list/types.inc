@@ -17,7 +17,17 @@ type, public :: _LIST
     integer :: size = 0
     type(_ITEM), pointer :: first => null(), last => null()
 contains
+    _PRIVATE_METHOD(_LIST,getitem_index)
+    _PRIVATE_METHOD(_LIST,getitem_slice)
+    generic :: getitem => getitem_index, getitem_slice
+    _METHOD(_LIST,append)
     _METHOD(_LIST,clear)
+    _METHOD(_LIST,copy)
+    _METHOD(_LIST,count)
+    _PRIVATE_METHOD(_LIST,extend_list)
+    _PRIVATE_METHOD(_LIST,extend_array)
+    generic :: extend => extend_list, extend_array
+    _METHOD(_LIST,index)
     final :: _CAT(_LIST,final)
 end type _LIST
 
