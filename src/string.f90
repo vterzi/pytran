@@ -37,12 +37,12 @@ module pytran_string
         RS = achar(30), &  ! record separator
         US = achar(31), &  ! unit separator
         DEL = achar(127), &  ! delete
-        ASCII_LOWERCASE = "abcdefghijklmnopqrstuvwxyz", &
-        ASCII_UPPERCASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ", &
-        ASCII_LETTERS = ASCII_LOWERCASE // ASCII_UPPERCASE, &
         DIGITS = "0123456789", &
         BINDIGITS = DIGITS(:2), &
         OCTDIGITS = DIGITS(:8), &
+        ASCII_LOWERCASE = "abcdefghijklmnopqrstuvwxyz", &
+        ASCII_UPPERCASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ", &
+        ASCII_LETTERS = ASCII_LOWERCASE // ASCII_UPPERCASE, &
         HEXDIGITS = DIGITS // ASCII_LOWERCASE(:5) // ASCII_UPPERCASE(:5), &
         PUNCTUATION = '!"' // "#$%&'()*+,-./:;<=>?@[" // achar(92) &
             // "]^_`{|}~", &
@@ -52,5 +52,5 @@ module pytran_string
             // BS // SO // SI // DLE // DC1 // DC2 // DC3 // DC4 // NAK &
             // SYN // ETB // CAN // EM // SUB // ESC // FS // GS // RS // US &
             // DEL, &
-        WORDCHARS = ASCII_LETTERS // '_' // DIGITS
+        WORDCHARS = DIGITS // ASCII_LETTERS // '_'
 end module pytran_string
