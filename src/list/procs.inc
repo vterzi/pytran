@@ -278,6 +278,41 @@ end function _PROC
 #undef _PROC
 
 
+#define _PROC _CAT(_LIST,assign_list)
+subroutine _PROC(self, other)
+    class(_LIST), intent(out) :: self
+    class(_LIST), intent(in) :: other
+
+    call other%copy(self)
+end subroutine _PROC
+#undef _PROC
+
+
+#define _PROC _CAT(_LIST,assign_array)
+subroutine _PROC(self, other)
+    class(_LIST), intent(out) :: self
+    _IN_TYPE, dimension(:), intent(in) :: other
+
+    integer :: n, i
+    type(_ITEM), pointer :: copied
+
+    n = size(other)
+    if (n > 0) then
+        allocate(copied)
+        copied%val = other(1)
+        self%first => copied
+        do i = 2, n
+            allocate(copied%next)
+            copied => copied%next
+            copied%val = other(i)
+        end do
+        self%last => copied
+        self%size = self%size
+    end if
+end subroutine _PROC
+#undef _PROC
+
+
 #define _PROC _CAT(_LIST,final)
 elemental subroutine _PROC(self)
     type(_LIST), intent(inout) :: self
@@ -316,6 +351,33 @@ function _PROC(self) result(result)
 end function _PROC
 #  undef _PROC
 #endif
+
+
+#define _PROC _CAT(array_assign,_LIST)
+subroutine _PROC(self, other)
+#if _TYPE_ID == _CHARACTER
+    _OUT_TYPE, dimension(:), intent(out) :: self
+#else
+    _OUT_TYPE, dimension(:), allocatable, intent(out) :: self
+#endif
+    class(_LIST), intent(in) :: other
+
+    integer :: n, i
+    type(_ITEM), pointer :: node
+
+    n = size(other)
+#if _TYPE_ID == _CHARACTER
+    allocate(character(len=len(other)) :: self(n))
+#else
+    allocate(self(n))
+#endif
+    node => other%first
+    do i = 1, n
+        self(i) = node%val
+        node => node%next
+    end do
+end subroutine _PROC
+#undef _PROC
 
 
 #undef _IN_TYPE

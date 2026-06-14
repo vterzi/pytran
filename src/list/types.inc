@@ -28,6 +28,9 @@ contains
     _PRIVATE_METHOD(_LIST,extend_array)
     generic :: extend => extend_list, extend_array
     _METHOD(_LIST,index)
+    _PRIVATE_METHOD(_LIST,assign_list)
+    _PRIVATE_METHOD(_LIST,assign_array)
+    generic :: assignment(=) => assign_list, assign_array
     final :: _CAT(_LIST,final)
 end type _LIST
 
@@ -40,6 +43,10 @@ interface len
     module procedure :: _CAT(len,_LIST)
 end interface len
 #endif
+
+interface assignment(=)
+    module procedure :: _CAT(array_assign,_LIST)
+end interface assignment(=)
 
 #undef _METHOD
 #undef _PRIVATE_METHOD
