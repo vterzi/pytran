@@ -1,5 +1,6 @@
 module stdlib
     use stdlib_kinds
+    use stdlib_string
     use stdlib_slice
     use stdlib_list
 
