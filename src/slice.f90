@@ -1,4 +1,4 @@
-module stdlib_slice
+module pytran_slice
     implicit none
 
     private
@@ -28,4 +28,4 @@ contains
         self%start = start
         self%stop = stop
     end function new_slice_two
-end module stdlib_slice
+end module pytran_slice

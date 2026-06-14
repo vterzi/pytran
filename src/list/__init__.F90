@@ -6,8 +6,8 @@
 #define _ITEM _(Item)_(_TYPE_LABEL)_(_KIND_LABEL)
 #define _LIST _(List)_(_TYPE_LABEL)_(_KIND_LABEL)
 
-module stdlib_list
-    use stdlib_slice, only: slice
+module pytran_list
+    use pytran_slice, only: slice
 
     implicit none
 
@@ -42,4 +42,4 @@ contains
 #undef _FILE
 #undef _TYPE_IDS
 
-end module stdlib_list
+end module pytran_list

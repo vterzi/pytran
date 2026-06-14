@@ -1,4 +1,4 @@
-module stdlib_string
+module pytran_string
     implicit none
 
     private
@@ -53,4 +53,4 @@ module stdlib_string
             // SYN // ETB // CAN // EM // SUB // ESC // FS // GS // RS // US &
             // DEL, &
         WORDCHARS = ASCII_LETTERS // '_' // DIGITS
-end module stdlib_string
+end module pytran_string

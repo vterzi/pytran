@@ -1,2 +1,3 @@
-# fstdlib
-A Fortran standard library
+# pytran
+
+Python-style collections and utilities for Fortran

@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.3.2)
 
-project(stdlib
+project(pytran
     LANGUAGES Fortran
     VERSION 0.1.0
 )
@@ -20,7 +20,7 @@ if(${BUILD_TESTING})
     add_subdirectory(tests)
 endif()
 
-install(TARGETS stdlib
+install(TARGETS pytran
     ARCHIVE DESTINATION lib
     LIBRARY DESTINATION lib
 )

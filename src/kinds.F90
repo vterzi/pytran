@@ -1,7 +1,7 @@
 ! Kinds of basic data types as parameters
 
 
-module stdlib_kinds
+module pytran_kinds
     implicit none
 
     private
@@ -60,4 +60,4 @@ module stdlib_kinds
         RK = kind(0.), &  ! real
         CK = kind((0, 0)), &  ! complex
         SK = kind('')  ! character
-end module stdlib_kinds
+end module pytran_kinds
