@@ -15,10 +15,10 @@
 
 
 #define _PROC _CAT(_LIST,getitem_index)
-function _PROC(self, i) result(value)
+function _PROC(self, i) result(val)
     class(_LIST), intent(in) :: self
     integer, intent(in) :: i
-    _OUT_TYPE :: value
+    _OUT_TYPE :: val
 
     integer :: idx
     type(_ITEM), pointer :: node
@@ -29,7 +29,7 @@ function _PROC(self, i) result(value)
         node => node%next
         idx = idx - 1
     end do
-    value = node%val
+    val = node%val
 end function _PROC
 #undef _PROC
 
@@ -107,16 +107,16 @@ elemental subroutine _PROC(self, object)
     class(_LIST), intent(inout) :: self
     _IN_TYPE, intent(in) :: object
 
-    type(_ITEM), pointer :: appended
+    type(_ITEM), pointer :: new
 
-    allocate(appended)
-    appended%val = object
+    allocate(new)
+    new%val = object
     if (associated(self%last)) then
-        self%last%next => appended
+        self%last%next => new
     else
-        self%first => appended
+        self%first => new
     end if
-    self%last => appended
+    self%last => new
     self%size = self%size + 1
 end subroutine _PROC
 #undef _PROC
@@ -145,21 +145,21 @@ subroutine _PROC(self, other)
     class(_LIST), intent(in) :: self
     type(_LIST), intent(out) :: other
 
-    type(_ITEM), pointer :: node, copied
+    type(_ITEM), pointer :: node, new
 
     node => self%first
     if (associated(node)) then
-        allocate(copied)
-        copied%val = node%val
-        other%first => copied
+        allocate(new)
+        new%val = node%val
+        other%first => new
         node => node%next
         do while (associated(node))
-            allocate(copied%next)
-            copied => copied%next
-            copied%val = node%val
+            allocate(new%next)
+            new => new%next
+            new%val = node%val
             node => node%next
         end do
-        other%last => copied
+        other%last => new
         other%size = self%size
     end if
 end subroutine _PROC
@@ -167,9 +167,9 @@ end subroutine _PROC
 
 
 #define _PROC _CAT(_LIST,count)
-function _PROC(self, value) result(count)
+function _PROC(self, val) result(count)
     class(_LIST), intent(in) :: self
-    _IN_TYPE, intent(in) :: value
+    _IN_TYPE, intent(in) :: val
     integer :: count
 
     type(_ITEM), pointer :: node
@@ -177,7 +177,7 @@ function _PROC(self, value) result(count)
     count = 0
     node => self%first
     do while (associated(node))
-        if (node%val _EQ value) count = count + 1
+        if (node%val _EQ val) count = count + 1
         node => node%next
     end do
 end function _PROC
@@ -189,25 +189,25 @@ subroutine _PROC(self, iterable)
     class(_LIST), intent(inout) :: self
     class(_LIST), intent(in) :: iterable
 
-    type(_ITEM), pointer :: node, appended
+    type(_ITEM), pointer :: node, new
 
     node => iterable%first
     if (associated(node)) then
-        allocate(appended)
-        appended%val = node%val
+        allocate(new)
+        new%val = node%val
         if (associated(self%last)) then
-            self%last%next => appended
+            self%last%next => new
         else
-            self%first => appended
+            self%first => new
         end if
         node => node%next
         do while (associated(node))
-            allocate(appended%next)
-            appended => appended%next
-            appended%val = node%val
+            allocate(new%next)
+            new => new%next
+            new%val = node%val
             node => node%next
         end do
-        self%last => appended
+        self%last => new
         self%size = self%size + iterable%size
     end if
 end subroutine _PROC
@@ -220,23 +220,23 @@ pure subroutine _PROC(self, iterable)
     _IN_TYPE, dimension(:), intent(in) :: iterable
 
     integer :: n, i
-    type(_ITEM), pointer :: appended
+    type(_ITEM), pointer :: new
 
     n = size(iterable)
     if (n > 0) then
-        allocate(appended)
-        appended%val = iterable(1)
+        allocate(new)
+        new%val = iterable(1)
         if (associated(self%last)) then
-            self%last%next => appended
+            self%last%next => new
         else
-            self%first => appended
+            self%first => new
         end if
         do i = 2, n
-            allocate(appended%next)
-            appended => appended%next
-            appended%val = iterable(i)
+            allocate(new%next)
+            new => new%next
+            new%val = iterable(i)
         end do
-        self%last => appended
+        self%last => new
         self%size = self%size + n
     end if
 end subroutine _PROC
@@ -244,9 +244,9 @@ end subroutine _PROC
 
 
 #define _PROC _CAT(_LIST,index)
-function _PROC(self, value, start, stop) result(index)
+function _PROC(self, val, start, stop) result(index)
     class(_LIST), intent(in) :: self
-    _IN_TYPE, intent(in) :: value
+    _IN_TYPE, intent(in) :: val
     integer, intent(in), optional :: start, stop
     integer :: index
 
@@ -269,7 +269,7 @@ function _PROC(self, value, start, stop) result(index)
     do while (associated(node))
         if (i > up) then
             exit
-        else if (i >= lo .and. node%val _EQ value) then
+        else if (i >= lo .and. node%val _EQ val) then
             index = i
             return
         end if
@@ -296,19 +296,19 @@ subroutine _PROC(self, other)
     _IN_TYPE, dimension(:), intent(in) :: other
 
     integer :: n, i
-    type(_ITEM), pointer :: copied
+    type(_ITEM), pointer :: new
 
     n = size(other)
     if (n > 0) then
-        allocate(copied)
-        copied%val = other(1)
-        self%first => copied
+        allocate(new)
+        new%val = other(1)
+        self%first => new
         do i = 2, n
-            allocate(copied%next)
-            copied => copied%next
-            copied%val = other(i)
+            allocate(new%next)
+            new => new%next
+            new%val = other(i)
         end do
-        self%last => copied
+        self%last => new
         self%size = self%size
     end if
 end subroutine _PROC
@@ -325,29 +325,29 @@ end subroutine _PROC
 
 
 #define _PROC _CAT(size,_LIST)
-elemental function _PROC(self) result(result)
+elemental function _PROC(self) result(res)
     class(_LIST), intent(in) :: self
-    integer :: result
+    integer :: res
 
-    result = self%size
+    res = self%size
 end function _PROC
 #undef _PROC
 
 
 #if _TYPE_ID == _CHARACTER
 #  define _PROC _CAT(len,_LIST)
-function _PROC(self) result(result)
+function _PROC(self) result(res)
     class(_LIST), intent(in) :: self
-    integer :: result
+    integer :: res
 
     integer :: length
     type(_ITEM), pointer :: node
 
-    result = 0
+    res = 0
     node => self%first
     do while (associated(node))
         length = len(node%val)
-        if (result < length) result = length
+        if (res < length) res = length
         node => node%next
     end do
 end function _PROC
