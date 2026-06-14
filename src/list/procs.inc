@@ -1,9 +1,11 @@
 #if _TYPE_ID == _CHARACTER
-#  define _IN_TYPE _TYPE(len=*, kind=_KIND)
-#  define _OUT_TYPE _TYPE(len=:, kind=_KIND), allocatable
+#  define _TYPE_LEN(X) _TYPE(len=X, kind=_KIND)
+#  define _IN_TYPE _TYPE_LEN(*)
+#  define _OUT_TYPE _TYPE_LEN(:), allocatable
 #else
-#  define _IN_TYPE _TYPE(_KIND)
-#  define _OUT_TYPE _TYPE(_KIND)
+#  define _TYPE_LEN(X) _TYPE(_KIND)
+#  define _IN_TYPE _TYPE_LEN()
+#  define _OUT_TYPE _TYPE_LEN()
 #endif
 #if _TYPE_ID == _LOGICAL
 #  define _EQ .eqv.
@@ -355,11 +357,7 @@ end function _PROC
 
 #define _PROC _CAT(array_assign,_LIST)
 subroutine _PROC(self, other)
-#if _TYPE_ID == _CHARACTER
-    _OUT_TYPE, dimension(:), intent(out) :: self
-#else
-    _OUT_TYPE, dimension(:), allocatable, intent(out) :: self
-#endif
+    _TYPE_LEN(:), dimension(:), allocatable, intent(out) :: self
     class(_LIST), intent(in) :: other
 
     integer :: n, i
@@ -380,6 +378,7 @@ end subroutine _PROC
 #undef _PROC
 
 
+#undef _TYPE_LEN
 #undef _IN_TYPE
 #undef _OUT_TYPE
 #undef _EQ
