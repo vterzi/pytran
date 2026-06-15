@@ -2,6 +2,7 @@
     (defined(_TYPE_IDS1) && defined(_TYPE_IDS2)) \
     && !(defined(_TYPE_ID1) && defined(_TYPE_ID2)) \
 )
+#  define _SELF "../inc/types.inc"
 #  define _TYPE_IDS _TYPE_IDS2
 #  define _TYPE_ID2 _TYPE_ID
 #  define _TYPE2 _TYPE
@@ -12,7 +13,7 @@
 #    define _TYPE1 logical
 #    define _TYPE_LABEL1 L
 #    define _DEFAULT_KIND1 _LK
-#    include "../inc/types.inc"
+#    include _SELF
 #    undef _TYPE_ID1
 #    undef _TYPE1
 #    undef _TYPE_LABEL1
@@ -23,7 +24,7 @@
 #    define _TYPE1 integer
 #    define _TYPE_LABEL1 I
 #    define _DEFAULT_KIND1 _IK
-#    include "../inc/types.inc"
+#    include _SELF
 #    undef _TYPE_ID1
 #    undef _TYPE1
 #    undef _TYPE_LABEL1
@@ -34,7 +35,7 @@
 #    define _TYPE1 real
 #    define _TYPE_LABEL1 R
 #    define _DEFAULT_KIND1 _RK
-#    include "../inc/types.inc"
+#    include _SELF
 #    undef _TYPE_ID1
 #    undef _TYPE1
 #    undef _TYPE_LABEL1
@@ -45,7 +46,7 @@
 #    define _TYPE1 complex
 #    define _TYPE_LABEL1 C
 #    define _DEFAULT_KIND1 _CK
-#    include "../inc/types.inc"
+#    include _SELF
 #    undef _TYPE_ID1
 #    undef _TYPE1
 #    undef _TYPE_LABEL1
@@ -56,7 +57,7 @@
 #    define _TYPE1 character
 #    define _TYPE_LABEL1 S
 #    define _DEFAULT_KIND1 _SK
-#    include "../inc/types.inc"
+#    include _SELF
 #    undef _TYPE_ID1
 #    undef _TYPE1
 #    undef _TYPE_LABEL1
@@ -67,6 +68,7 @@
 #  undef _TYPE2
 #  undef _TYPE_LABEL2
 #  undef _DEFAULT_KIND2
+#  undef _SELF
 #elif defined(_TYPE_IDS)
 #  if _TYPE_IDS & _LOGICAL
 #    define _TYPE_ID _LOGICAL
