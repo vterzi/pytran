@@ -34,6 +34,10 @@ contains
     final :: _CAT(_LIST,final)
 end type _LIST
 
+interface assignment(=)
+    module procedure :: _CAT(array_assign,_LIST)
+end interface assignment(=)
+
 interface size
     module procedure :: _CAT(size,_LIST)
 end interface size

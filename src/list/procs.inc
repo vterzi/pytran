@@ -324,6 +324,29 @@ end subroutine _PROC
 #undef _PROC
 
 
+#define _PROC _CAT(array_assign,_LIST)
+subroutine _PROC(self, other)
+    _TYPE_LEN(:), dimension(:), allocatable, intent(out) :: self
+    class(_LIST), intent(in) :: other
+
+    integer :: n, i
+    type(_ITEM), pointer :: node
+
+    n = size(other)
+#if _TYPE_ID == _CHARACTER
+    allocate(character(len=len(other)) :: self(n))
+#else
+    allocate(self(n))
+#endif
+    node => other%first
+    do i = 1, n
+        self(i) = node%val
+        node => node%next
+    end do
+end subroutine _PROC
+#undef _PROC
+
+
 #define _PROC _CAT(size,_LIST)
 elemental function _PROC(self) result(res)
     class(_LIST), intent(in) :: self
@@ -353,29 +376,6 @@ function _PROC(self) result(res)
 end function _PROC
 #  undef _PROC
 #endif
-
-
-#define _PROC _CAT(array_assign,_LIST)
-subroutine _PROC(self, other)
-    _TYPE_LEN(:), dimension(:), allocatable, intent(out) :: self
-    class(_LIST), intent(in) :: other
-
-    integer :: n, i
-    type(_ITEM), pointer :: node
-
-    n = size(other)
-#if _TYPE_ID == _CHARACTER
-    allocate(character(len=len(other)) :: self(n))
-#else
-    allocate(self(n))
-#endif
-    node => other%first
-    do i = 1, n
-        self(i) = node%val
-        node => node%next
-    end do
-end subroutine _PROC
-#undef _PROC
 
 
 #undef _TYPE_LEN
