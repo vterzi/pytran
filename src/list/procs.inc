@@ -357,7 +357,48 @@ end function _PROC
 #undef _PROC
 
 
-#if _TYPE_ID == _CHARACTER
+#if _TYPE_ID == _LOGICAL
+#  define _PROC _CAT(all,_LIST)
+function _PROC(self) result(res)
+    class(_LIST), intent(in) :: self
+    logical :: res
+
+    type(_ITEM), pointer :: node
+
+    res = .true.
+    node => self%first
+    do while (associated(node))
+        if (.not. node%val) then
+            res = .false.
+            return
+        end if
+        node => node%next
+    end do
+end function _PROC
+#  undef _PROC
+
+
+#  define _PROC _CAT(any,_LIST)
+function _PROC(self) result(res)
+    class(_LIST), intent(in) :: self
+    logical :: res
+
+    type(_ITEM), pointer :: node
+
+    res = .false.
+    node => self%first
+    do while (associated(node))
+        if (node%val) then
+            res = .true.
+            return
+        end if
+        node => node%next
+    end do
+end function _PROC
+#  undef _PROC
+
+#elif _TYPE_ID == _CHARACTER
+
 #  define _PROC _CAT(len,_LIST)
 function _PROC(self) result(res)
     class(_LIST), intent(in) :: self

@@ -12,7 +12,7 @@ module pytran_list
     implicit none
 
     private
-    public :: len, size
+    public :: assignment(=), all, any, len, size
 
 #define _TYPE_IDS (_LOGICAL | _INTEGER | _REAL | _COMPLEX | _CHARACTER)
 #define _FILE "../list/types.inc"
