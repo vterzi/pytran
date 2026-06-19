@@ -170,6 +170,14 @@ contains
     end function lower
 
 
+    pure function strip(arg) result(res)
+        character(len=*), intent(in) :: arg
+        character(len=:), allocatable :: res
+
+        res = trim(adjustl(arg))
+    end function strip
+
+
     elemental function is_logical(arg) result(res)
         character(len=*), intent(in) :: arg
         logical :: res
