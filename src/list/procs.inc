@@ -1,24 +1,12 @@
-#if _TYPE_ID == _CHARACTER
-#  define _TYPE_LEN(X) _TYPE(len=X, kind=_KIND)
-#  define _IN_TYPE _TYPE_LEN(*)
-#  define _OUT_TYPE _TYPE_LEN(:), allocatable
-#else
-#  define _TYPE_LEN(X) _TYPE(_KIND)
-#  define _IN_TYPE _TYPE_LEN()
-#  define _OUT_TYPE _TYPE_LEN()
-#endif
-#if _TYPE_ID == _LOGICAL
-#  define _EQ .eqv.
-#else
-#  define _EQ ==
-#endif
+#include "../inc/vars.inc"
+#include "../inc/cmp.inc"
 
 
 #define _PROC _CAT(_LIST,getitem_index)
 function _PROC(self, i) result(val)
     class(_LIST), intent(in) :: self
     integer, intent(in) :: i
-    _OUT_TYPE :: val
+    _RES_TYPE :: val
 
     integer :: idx
     type(_ITEM), pointer :: node
@@ -105,7 +93,7 @@ end function _PROC
 #define _PROC _CAT(_LIST,append)
 elemental subroutine _PROC(self, object)
     class(_LIST), intent(inout) :: self
-    _IN_TYPE, intent(in) :: object
+    _ARG_TYPE, intent(in) :: object
 
     type(_ITEM), pointer :: new
 
@@ -169,7 +157,7 @@ end subroutine _PROC
 #define _PROC _CAT(_LIST,count)
 function _PROC(self, val) result(count)
     class(_LIST), intent(in) :: self
-    _IN_TYPE, intent(in) :: val
+    _ARG_TYPE, intent(in) :: val
     integer :: count
 
     type(_ITEM), pointer :: node
@@ -217,7 +205,7 @@ end subroutine _PROC
 #define _PROC _CAT(_LIST,extend_array)
 pure subroutine _PROC(self, iterable)
     class(_LIST), intent(inout) :: self
-    _IN_TYPE, dimension(:), intent(in) :: iterable
+    _ARG_TYPE, dimension(:), intent(in) :: iterable
 
     integer :: n, i
     type(_ITEM), pointer :: new
@@ -246,7 +234,7 @@ end subroutine _PROC
 #define _PROC _CAT(_LIST,index)
 function _PROC(self, val, start, stop) result(index)
     class(_LIST), intent(in) :: self
-    _IN_TYPE, intent(in) :: val
+    _ARG_TYPE, intent(in) :: val
     integer, intent(in), optional :: start, stop
     integer :: index
 
@@ -293,7 +281,7 @@ end subroutine _PROC
 #define _PROC _CAT(_LIST,assign_array)
 subroutine _PROC(self, other)
     class(_LIST), intent(out) :: self
-    _IN_TYPE, dimension(:), intent(in) :: other
+    _ARG_TYPE, dimension(:), intent(in) :: other
 
     integer :: n, i
     type(_ITEM), pointer :: new
@@ -417,9 +405,3 @@ function _PROC(self) result(res)
 end function _PROC
 #  undef _PROC
 #endif
-
-
-#undef _TYPE_LEN
-#undef _IN_TYPE
-#undef _OUT_TYPE
-#undef _EQ

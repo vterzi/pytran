@@ -3,8 +3,9 @@
 #define _(X) X
 
 #define _CAT(X,Y) _(X)_(_)_(Y)
-#define _ITEM _(Item)_(_TYPE_LABEL)_(_KIND_LABEL)
-#define _LIST _(List)_(_TYPE_LABEL)_(_KIND_LABEL)
+#define _LABEL _(_TYPE_LABEL)_(_KIND_LABEL)
+#define _ITEM _(Item)_(_LABEL)
+#define _LIST _(List)_(_LABEL)
 
 module pytran_list
     use pytran_slice, only: slice
