@@ -59,5 +59,5 @@ module pytran_kinds
         IK = kind(0), &  ! integer
         RK = kind(0.), &  ! real
         CK = kind((0, 0)), &  ! complex
-        SK = kind('')  ! character
+        SK = kind("")  ! character
 end module pytran_kinds

@@ -52,7 +52,7 @@ module pytran_string
             // BS // SO // SI // DLE // DC1 // DC2 // DC3 // DC4 // NAK &
             // SYN // ETB // CAN // EM // SUB // ESC // FS // GS // RS // US &
             // DEL, &
-        WORDCHARS = DIGITS // ASCII_LETTERS // '_'
+        WORDCHARS = DIGITS // ASCII_LETTERS // "_"
 
     integer, parameter :: &
         CASESHIFT = iachar(ASCII_LOWERCASE(:1)) - iachar(ASCII_UPPERCASE(:1))
@@ -96,7 +96,7 @@ contains
 
         res = len(arg) > 0 &
             .and. verify(arg, WORDCHARS) == 0 &
-            .and. scan(arg(1:1), DIGITS // '_') == 0
+            .and. scan(arg(1:1), DIGITS // "_") == 0
     end function isidentifier
 
 
@@ -180,10 +180,10 @@ contains
         res = n > 0
         if (.not. res) return
         i = 1
-        if (arg(i:i) == '.') i = i + 1
+        if (arg(i:i) == ".") i = i + 1
         res = i <= n
         if (.not. res) return
-        res = verify(arg(i:i), 'TtFf') == 0
+        res = verify(arg(i:i), "TtFf") == 0
     end function is_logical
 
 
@@ -191,7 +191,7 @@ contains
         character(len=*), intent(in) :: arg
         logical :: res
 
-        res = arg == '+' .or. arg == '-'
+        res = arg == "+" .or. arg == "-"
     end function is_sign
 
 
@@ -223,7 +223,7 @@ contains
 
         integer :: i
 
-        i = index(arg, '.')
+        i = index(arg, ".")
         if (i > 0) then
             res = is_unsigned_integer(arg(: i - 1) // arg(i + 1 :))
         else
@@ -254,10 +254,10 @@ contains
         character(len=len(arg)) :: temp
 
         temp = lower(arg)
-        if (temp == 'nan' .or. temp == 'inf' .or. temp == 'infinity') then
+        if (temp == "nan" .or. temp == "inf" .or. temp == "infinity") then
             res = .true.
         else
-            i = scan(arg, 'EeDd')
+            i = scan(arg, "EeDd")
             if (i > 0) then
                 res = ( &
                     is_unsigned_fixed_real(arg(: i - 1)) &
