@@ -42,15 +42,21 @@ interface size
     module procedure :: _CAT(size,_LIST)
 end interface size
 
-#if _TYPE_ID == _CHARACTER
+#if _TYPE_ID == _LOGICAL
+interface all
+    module procedure :: _CAT(all,_LIST)
+end interface all
+
+interface any
+    module procedure :: _CAT(any,_LIST)
+end interface any
+
+#elif _TYPE_ID == _CHARACTER
+
 interface len
     module procedure :: _CAT(len,_LIST)
 end interface len
 #endif
-
-interface assignment(=)
-    module procedure :: _CAT(array_assign,_LIST)
-end interface assignment(=)
 
 #undef _METHOD
 #undef _PRIVATE_METHOD
