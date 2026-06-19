@@ -2,6 +2,11 @@ module pytran_string
     implicit none
 
     private
+    public :: &
+        isspace, isdigit, isalpha, isalnum, isidentifier, isprintable, &
+        isascii, isupper, islower, &
+        upper, lower, strip, &
+        is_logical, is_unsigned, is_integer, is_real, is_complex
 
     character(len=*), parameter, public :: &
         NUL = achar(0), &  ! null
@@ -57,6 +62,10 @@ module pytran_string
     integer, parameter :: &
         CASESHIFT = iachar(ASCII_LOWERCASE(:1)) - iachar(ASCII_UPPERCASE(:1))
 
+    interface is_unsigned
+        module procedure :: is_unsigned_integer
+    end interface is_unsigned
+
 contains
     elemental function isspace(arg) result(res)
         character(len=*), intent(in) :: arg
@@ -94,9 +103,11 @@ contains
         character(len=*), intent(in) :: arg
         logical :: res
 
-        res = len(arg) > 0 &
+        res = ( &
+            len(arg) > 0 &
             .and. verify(arg, WORDCHARS) == 0 &
-            .and. scan(arg(1:1), DIGITS // "_") == 0
+            .and. scan(arg(1:1), DIGITS // "_") == 0 &
+        )
     end function isidentifier
 
 
@@ -147,7 +158,7 @@ contains
         res = arg
         i = 0
         do
-            i = scan(res(i + 1 :), ASCII_LOWERCASE)
+            i = scan(res((i + 1):), ASCII_LOWERCASE)
             if (i == 0) exit
             res(i:i) = achar(iachar(res(i:i)) - CASESHIFT)
         end do
@@ -163,7 +174,7 @@ contains
         res = arg
         i = 0
         do
-            i = scan(res(i + 1 :), ASCII_UPPERCASE)
+            i = scan(res((i + 1):), ASCII_UPPERCASE)
             if (i == 0) exit
             res(i:i) = achar(iachar(res(i:i)) + CASESHIFT)
         end do
@@ -191,7 +202,7 @@ contains
         if (arg(i:i) == ".") i = i + 1
         res = i <= n
         if (.not. res) return
-        res = verify(arg(i:i), "TtFf") == 0
+        res = verify(arg(i:i), "fFtT") == 0
     end function is_logical
 
 
@@ -233,28 +244,14 @@ contains
 
         i = index(arg, ".")
         if (i > 0) then
-            res = is_unsigned_integer(arg(: i - 1) // arg(i + 1 :))
+            res = is_unsigned_integer(arg(:(i - 1)) // arg((i + 1):))
         else
             res = is_unsigned_integer(arg)
         end if
     end function is_unsigned_fixed_real
 
 
-    elemental function is_fixed_real(arg) result(res)
-        character(len=*), intent(in) :: arg
-        logical :: res
-
-        integer :: i
-
-        res = len(arg) > 0
-        if (.not. res) return
-        i = 1
-        if (is_sign(arg(i:i))) i = i + 1
-        res = is_unsigned_fixed_real(arg(i:))
-    end function is_fixed_real
-
-
-    elemental function is_unsigned_float_real(arg) result(res)
+    elemental function is_unsigned_real(arg) result(res)
         character(len=*), intent(in) :: arg
         logical :: res
 
@@ -265,20 +262,20 @@ contains
         if (temp == "nan" .or. temp == "inf" .or. temp == "infinity") then
             res = .true.
         else
-            i = scan(arg, "EeDd")
+            i = scan(arg, "eEdD")
             if (i > 0) then
                 res = ( &
-                    is_unsigned_fixed_real(arg(: i - 1)) &
-                    .and. is_integer(arg(i + 1 :)) &
+                    is_unsigned_fixed_real(arg(:(i - 1))) &
+                    .and. is_integer(arg((i + 1):)) &
                 )
             else
                 res = is_unsigned_fixed_real(arg)
             end if
         end if
-    end function is_unsigned_float_real
+    end function is_unsigned_real
 
 
-    elemental function is_float_real(arg) result(res)
+    elemental function is_real(arg) result(res)
         character(len=*), intent(in) :: arg
         logical :: res
 
@@ -288,6 +285,22 @@ contains
         if (.not. res) return
         i = 1
         if (is_sign(arg(i:i))) i = i + 1
-        res = is_unsigned_float_real(arg(i:))
-    end function is_float_real
+        res = is_unsigned_real(arg(i:))
+    end function is_real
+
+
+    elemental function is_complex(arg) result(res)
+        character(len=*), intent(in) :: arg
+        logical :: res
+
+        integer :: n, i
+
+        n = len(arg)
+        i = index(arg, ",")
+        res = arg(1:1) == "(" .and. arg(n:n) == ")" .and. i > 0
+        if (res) res = ( &
+            is_real(strip(arg(2:(i - 1)))) &
+            .and. is_real(strip(arg((i + 1):(n - 1)))) &
+        )
+    end function is_complex
 end module pytran_string
