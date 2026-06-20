@@ -1,3 +1,5 @@
+#undef _NUM
+#undef _NUM_STR
 #if _TYPE_ID == _COMPLEX
 #  define _NUM 2
 #  define _NUM_STR "2"
@@ -50,7 +52,3 @@ elemental function _PROC(number) result(res)
     ) number
 end function _PROC
 #undef _OP
-
-
-#undef _NUM
-#undef _NUM_STR
