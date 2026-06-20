@@ -14,9 +14,9 @@ elemental function _PROC(number) result(res)
     _TYPE(_KIND), intent(in) :: number
     character(len=(_NUM * storage_size(number))) :: res
 
-    character(len=12) :: width
+    character(len=MAX_LEN_INTEGER_STR) :: width
 
-    write(width, "(i0)") len(res)
+    write(width, *) len(res)
     write( &
         res, "(" // _NUM_STR // "b" // width // "." // width // ")" &
     ) number
@@ -29,9 +29,9 @@ elemental function _PROC(number) result(res)
     _TYPE(_KIND), intent(in) :: number
     character(len=(_NUM * storage_size(number) / 4)) :: res
 
-    character(len=12) :: width
+    character(len=MAX_LEN_INTEGER_STR) :: width
 
-    write(width, "(i0)") len(res)
+    write(width, *) len(res)
     write( &
         res, "(" // _NUM_STR // "o" // width // "." // width // ")" &
     ) number
@@ -44,9 +44,9 @@ elemental function _PROC(number) result(res)
     _TYPE(_KIND), intent(in) :: number
     character(len=(_NUM * storage_size(number) / 8)) :: res
 
-    character(len=12) :: width
+    character(len=MAX_LEN_INTEGER_STR) :: width
 
-    write(width, "(i0)") len(res)
+    write(width, *) len(res)
     write( &
         res, "(" // _NUM_STR // "z" // width // "." // width // ")" &
     ) number
