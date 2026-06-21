@@ -221,7 +221,7 @@ function _PROC(self, val) result(count)
     count = 0
     item => self%first
     do while (associated(item))
-        if (item%val _EQ val) count = count + 1
+        if (_EQ(item%val,val)) count = count + 1
         item => item%next
     end do
 end function _PROC
@@ -313,7 +313,7 @@ function _PROC(self, val, start, stop) result(index)
     do while (associated(item))
         if (i > up) then
             exit
-        else if (i >= lo .and. item%val _EQ val) then
+        else if (i >= lo .and. _EQ(item%val,val)) then
             index = i
             return
         end if
