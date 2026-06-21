@@ -325,7 +325,7 @@ end function _PROC
 
 
 #define _PROC _CAT2(_LIST,insert)
-elemental subroutine _PROC(self, index, object)
+subroutine _PROC(self, index, object)
     class(_LIST), intent(inout) :: self
     integer, intent(in) :: index
     _ARG_TYPE, intent(in) :: object
@@ -355,7 +355,7 @@ end subroutine _PROC
 
 
 #define _PROC _CAT2(_LIST,pop)
-elemental function _PROC(self, index) result(val)
+function _PROC(self, index) result(val)
     class(_LIST), intent(inout) :: self
     integer, intent(in), optional :: index
     _RES_TYPE :: val
