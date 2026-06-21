@@ -407,12 +407,22 @@ end function _PROC
 #endif
 
 
+#define _PROC _CAT2(_ITER,stop)
+elemental function _PROC(self) result(res)
+    class(_ITER), intent(in) :: self
+    logical :: res
+
+    res = .not. associated(self%item)
+end function _PROC
+#undef _PROC
+
+
 #define _PROC _CAT2(_ITER,getitem)
 pure function _PROC(self) result(res)
     class(_ITER), intent(in) :: self
     _RES_TYPE :: res
 
-    if (.not. associated(self%item)) error stop  ! StopIteration
+    if (self%stop()) error stop  ! StopIteration
     res = self%item%val
 end function _PROC
 #undef _PROC
@@ -423,7 +433,7 @@ elemental subroutine _PROC(self, val)
     class(_ITER), intent(inout) :: self
     _ARG_TYPE, intent(in) :: val
 
-    if (.not. associated(self%item)) error stop  ! StopIteration
+    if (self%stop()) error stop  ! StopIteration
     self%item%val = val
 end subroutine _PROC
 #undef _PROC
@@ -433,7 +443,7 @@ end subroutine _PROC
 elemental subroutine _PROC(self)
     class(_ITER), intent(inout) :: self
 
-    if (.not. associated(self%item)) error stop  ! StopIteration
+    if (self%stop()) error stop  ! StopIteration
     self%item => self%item%next
 end subroutine _PROC
 #undef _PROC

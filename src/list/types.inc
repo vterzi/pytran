@@ -65,6 +65,7 @@ type, public :: _ITER
     private
     type(_ITEM), pointer :: item => null()
 contains
+    _METHOD(_ITER,stop)
     _METHOD(_ITER,getitem)
     _METHOD(_ITER,setitem)
     _METHOD(_ITER,next)
