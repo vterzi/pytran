@@ -20,6 +20,7 @@ type, public :: _LIST
     integer :: size = 0
     type(_ITEM), pointer :: first => null(), last => null()
 contains
+    _PRIVATE_METHOD(_LIST,item)
     _PRIVATE_METHOD(_LIST,getitem_index)
     _PRIVATE_METHOD(_LIST,getitem_slice)
     generic :: getitem => getitem_index, getitem_slice
