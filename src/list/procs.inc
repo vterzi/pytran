@@ -11,7 +11,7 @@ function _PROC(self, i) result(val)
     integer :: idx
     type(_ITEM), pointer :: item
 
-    idx = wraparound_index(i, self%size)
+    idx = wraparound_index(i, self%size, .true.)
     item => self%first
     do while (idx > 1)
         item => item%next
@@ -32,8 +32,8 @@ function _PROC(self, s) result(list)
     type(_ITEM), pointer :: item, prev, next
 
     n = self%size
-    lo = wraparound_index(s%start, n)
-    up = wraparound_index(s%stop, n)
+    lo = wraparound_index(s%start, n, .true.)
+    up = wraparound_index(s%stop, n, .true.)
     st = s%step
     if (st == 0) then
         error stop "slice step cannot be zero"  ! ValueError

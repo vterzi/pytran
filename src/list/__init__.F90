@@ -20,17 +20,22 @@ module pytran_list
 #undef _TYPE_IDS
 
 contains
-    elemental function wraparound_index(index, size) result(wrapped_index)
+    elemental function wraparound_index( &
+        index, size, check &
+    ) result(wrapped_index)
         integer, intent(in) :: index, size
+        logical, intent(in) :: check
         integer :: wrapped_index
 
-        if (index > 0 .and. index <= size) then
+        if (index >= 0) then
             wrapped_index = index
-        else if (index < 0 .and. index >= -size) then
-            wrapped_index = index + size + 1
         else
-            wrapped_index = 0
-            error stop "list index out of range"  ! IndexError
+            wrapped_index = index + size + 1
+        end if
+        if (check) then
+            if ( &
+                index < 1 .or. index > size &
+            ) error stop "list index out of range"  ! IndexError
         end if
     end function wraparound_index
 
