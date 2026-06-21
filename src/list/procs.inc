@@ -40,12 +40,12 @@ function _PROC(self, s) result(list)
     type(slice), intent(in) :: s
     type(_LIST) :: list
 
-    integer :: n, lo, up, st, idx, i
+    integer :: size, lo, up, st, idx, i
     type(_ITEM), pointer :: item, prev, next
 
-    n = self%size
-    lo = wraparound_index(s%start, n, .true.)
-    up = wraparound_index(s%stop, n, .true.)
+    size = self%size
+    lo = wraparound_index(s%start, size, .true.)
+    up = wraparound_index(s%stop, size, .true.)
     st = s%step
     if (st == 0) then
         error stop "slice step cannot be zero"  ! ValueError
@@ -114,12 +114,12 @@ subroutine _PROC(self, key, val)
     type(slice), intent(in) :: key
     _ARG_TYPE, intent(in) :: val
 
-    integer :: n, lo, up, st, idx, i
+    integer :: size, lo, up, st, idx, i
     type(_ITEM), pointer :: item
 
-    n = self%size
-    lo = wraparound_index(key%start, n, .true.)
-    up = wraparound_index(key%stop, n, .true.)
+    size = self%size
+    lo = wraparound_index(key%start, size, .true.)
+    up = wraparound_index(key%stop, size, .true.)
     st = key%step
     if (st == 0) then
         error stop "slice step cannot be zero"  ! ValueError
@@ -330,12 +330,12 @@ elemental subroutine _PROC(self, index, object)
     integer, intent(in) :: index
     _ARG_TYPE, intent(in) :: object
 
-    integer :: n, idx
+    integer :: size, idx
     type(_ITEM), pointer :: item, new
 
-    n = self%size
-    idx = wraparound_index(index, n, .false.)
-    if (idx > n) then
+    size = self%size
+    idx = wraparound_index(index, size, .false.)
+    if (idx > size) then
         call self%append(object)
     else
         allocate(new)
