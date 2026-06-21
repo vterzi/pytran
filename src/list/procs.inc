@@ -2,21 +2,33 @@
 #include "../inc/cmp.inc"
 
 
+#define _PROC _CAT2(_LIST,item)
+function _PROC(self, index) result(item)
+    class(_LIST), intent(in) :: self
+    integer, intent(in) :: index
+    type(_ITEM), pointer :: item
+
+    integer :: idx
+
+    idx = index
+    item => self%first
+    do while (idx > 1)
+        item => item%next
+        idx = idx - 1
+    end do
+end function _PROC
+#undef _PROC
+
+
 #define _PROC _CAT2(_LIST,getitem_index)
 function _PROC(self, i) result(val)
     class(_LIST), intent(in) :: self
     integer, intent(in) :: i
     _RES_TYPE :: val
 
-    integer :: idx
     type(_ITEM), pointer :: item
 
-    idx = wraparound_index(i, self%size, .true.)
-    item => self%first
-    do while (idx > 1)
-        item => item%next
-        idx = idx - 1
-    end do
+    item => self%item(wraparound_index(i, self%size, .true.))
     val = item%val
 end function _PROC
 #undef _PROC
@@ -38,12 +50,8 @@ function _PROC(self, s) result(list)
     if (st == 0) then
         error stop "slice step cannot be zero"  ! ValueError
     else if (st > 0 .and. lo <= up) then
-        item => self%first
-        idx = 1
-        do while (idx < lo)
-            item => item%next
-            idx = idx + 1
-        end do
+        idx = lo
+        item => self%item(idx)
         allocate(next)
         next%val = item%val
         list%first => next
@@ -64,12 +72,8 @@ function _PROC(self, s) result(list)
         idx = lo
         lo = lo - ((lo - up) / st) * st
         up = idx
-        item => self%first
-        idx = 1
-        do while (idx < lo)
-            item => item%next
-            idx = idx + 1
-        end do
+        idx = lo
+        item => self%item(idx)
         allocate(prev)
         prev%val = item%val
         list%last => prev
