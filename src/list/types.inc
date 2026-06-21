@@ -1,3 +1,6 @@
+#undef _METHOD
+#undef _PRIVATE_METHOD
+#undef _ELEM_TYPE
 #define _METHOD(T,P) procedure :: P => _CAT(T,P)
 #define _PRIVATE_METHOD(T,P) procedure, private :: P => _CAT(T,P)
 #if _TYPE_ID == _CHARACTER
@@ -58,6 +61,16 @@ interface len
 end interface len
 #endif
 
-#undef _METHOD
-#undef _PRIVATE_METHOD
-#undef _ELEM_TYPE
+type, public :: _ITER
+    private
+    type(_ITEM), pointer :: item => null()
+contains
+    _METHOD(_ITER,getitem)
+    _METHOD(_ITER,setitem)
+    _METHOD(_ITER,next)
+end type _ITER
+
+interface assignment(=)
+    module procedure :: _(_ITER)_(_assign_)_(_LIST)
+    module procedure :: _(_ITER)_(_assign_)_(_ITER)
+end interface assignment(=)

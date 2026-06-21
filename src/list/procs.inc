@@ -405,3 +405,55 @@ function _PROC(self) result(res)
 end function _PROC
 #  undef _PROC
 #endif
+
+
+#define _PROC _CAT(_ITER,getitem)
+pure function _PROC(self) result(res)
+    class(_ITER), intent(in) :: self
+    _RES_TYPE :: res
+
+    if (.not. associated(self%item)) error stop  ! StopIteration
+    res = self%item%val
+end function _PROC
+#undef _PROC
+
+
+#define _PROC _CAT(_ITER,setitem)
+elemental subroutine _PROC(self, val)
+    class(_ITER), intent(inout) :: self
+    _ARG_TYPE, intent(in) :: val
+
+    if (.not. associated(self%item)) error stop  ! StopIteration
+    self%item%val = val
+end subroutine _PROC
+#undef _PROC
+
+
+#define _PROC _CAT(_ITER,next)
+elemental subroutine _PROC(self)
+    class(_ITER), intent(inout) :: self
+
+    if (.not. associated(self%item)) error stop  ! StopIteration
+    self%item => self%item%next
+end subroutine _PROC
+#undef _PROC
+
+
+#define _PROC _(_ITER)_(_assign_)_(_LIST)
+subroutine _PROC(self, other)
+    class(_ITER), intent(out) :: self
+    class(_LIST), intent(in) :: other
+
+    self%item => other%first
+end subroutine _PROC
+#undef _PROC
+
+
+#define _PROC _(_ITER)_(_assign_)_(_ITER)
+subroutine _PROC(self, other)
+    class(_ITER), intent(out) :: self
+    class(_ITER), intent(in) :: other
+
+    self%item => other%item
+end subroutine _PROC
+#undef _PROC

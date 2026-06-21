@@ -3,6 +3,7 @@
 
 #define _ITEM _(Item)_(_LABEL)
 #define _LIST _(List)_(_LABEL)
+#define _ITER _(Iter)_(_LABEL)
 
 module pytran_list
     use pytran_slice, only: slice
