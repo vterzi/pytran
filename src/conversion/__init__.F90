@@ -7,6 +7,8 @@
 #define _PROC _CAT(_OP,_LABEL)
 
 module pytran_conversion
+    use ieee_arithmetic, only: ieee_is_nan, ieee_is_finite
+
     implicit none
 
     private
@@ -88,6 +90,16 @@ module pytran_conversion
         ! left parenthesis + comma + right parenthesis
         COMPLEX_EXTRA_WIDTH = 3
 
+#define _TYPE_IDS _INTEGER
+#define _OP dec_digits
+#include "../inc/iface.inc"
+#undef _TYPE_IDS
+
+#define _TYPE_IDS _REAL
+#define _OP dec_exponent
+#include "../inc/iface.inc"
+#undef _TYPE_IDS
+
 #define _TYPE_IDS (_LOGICAL | _INTEGER | _REAL | _COMPLEX)
 #define _OP bin
 #include "../inc/iface.inc"
@@ -97,10 +109,57 @@ module pytran_conversion
 #include "../inc/iface.inc"
 #undef _TYPE_IDS
 
+#define _TYPE_IDS (_LOGICAL | _INTEGER | _REAL | _COMPLEX | _CHARACTER)
+#define _OP character
+#include "../inc/iface.inc"
+#undef _TYPE_IDS
+
 contains
 
+#define _TYPE_IDS _INTEGER
+#define _FILE "../conversion/dec_digits.inc"
+#include "../inc/types.inc"
+#undef _FILE
+#undef _TYPE_IDS
+
+#define _TYPE_IDS _REAL
+#define _FILE "../conversion/dec_exponent.inc"
+#include "../inc/types.inc"
+#undef _FILE
+#undef _TYPE_IDS
+
 #define _TYPE_IDS (_LOGICAL | _INTEGER | _REAL | _COMPLEX)
-#define _FILE "../conversion/procs.inc"
+#define _FILE "../conversion/boz.inc"
+#include "../inc/types.inc"
+#undef _FILE
+#undef _TYPE_IDS
+
+#define _TYPE_IDS _LOGICAL
+#define _FILE "../conversion/character_l.inc"
+#include "../inc/types.inc"
+#undef _FILE
+#undef _TYPE_IDS
+
+#define _TYPE_IDS _INTEGER
+#define _FILE "../conversion/character_i.inc"
+#include "../inc/types.inc"
+#undef _FILE
+#undef _TYPE_IDS
+
+#define _TYPE_IDS _REAL
+#define _FILE "../conversion/character_r.inc"
+#include "../inc/types.inc"
+#undef _FILE
+#undef _TYPE_IDS
+
+#define _TYPE_IDS _COMPLEX
+#define _FILE "../conversion/character_c.inc"
+#include "../inc/types.inc"
+#undef _FILE
+#undef _TYPE_IDS
+
+#define _TYPE_IDS _CHARACTER
+#define _FILE "../conversion/character_s.inc"
 #include "../inc/types.inc"
 #undef _FILE
 #undef _TYPE_IDS
