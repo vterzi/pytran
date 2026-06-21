@@ -324,6 +324,36 @@ end function _PROC
 #undef _PROC
 
 
+#define _PROC _CAT2(_LIST,insert)
+elemental subroutine _PROC(self, index, object)
+    class(_LIST), intent(inout) :: self
+    integer, intent(in) :: index
+    _ARG_TYPE, intent(in) :: object
+
+    integer :: n, idx
+    type(_ITEM), pointer :: item, new
+
+    n = self%size
+    idx = wraparound_index(index, n, .false.)
+    if (idx > n) then
+        call self%append(object)
+    else
+        allocate(new)
+        new%val = object
+        if (idx < 1) then
+            new%next => self%first
+            self%first => new
+        else
+            item => self%item(idx)
+            new%next => item%next
+            item%next => new
+        end if
+        self%size = self%size + 1
+    end if
+end subroutine _PROC
+#undef _PROC
+
+
 #define _PROC _CAT2(_LIST,assign_list)
 subroutine _PROC(self, other)
     class(_LIST), intent(out) :: self

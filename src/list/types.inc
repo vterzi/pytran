@@ -35,6 +35,7 @@ contains
     _PRIVATE_METHOD(_LIST,extend_array)
     generic :: extend => extend_list, extend_array
     _METHOD(_LIST,index)
+    _METHOD(_LIST,insert)
     _PRIVATE_METHOD(_LIST,assign_list)
     _PRIVATE_METHOD(_LIST,assign_array)
     generic :: assignment(=) => assign_list, assign_array
