@@ -1,7 +1,7 @@
 #include "../inc/init.inc"
 #include "../inc/utils.inc"
 
-#define _PROC _CAT(_OP,_LABEL)
+#define _PROC _CAT2(_OP,_LABEL)
 
 module pytran_utils
     use ieee_arithmetic, only: ieee_is_nan, ieee_is_finite

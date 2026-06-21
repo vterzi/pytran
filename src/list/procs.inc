@@ -2,7 +2,7 @@
 #include "../inc/cmp.inc"
 
 
-#define _PROC _CAT(_LIST,getitem_index)
+#define _PROC _CAT2(_LIST,getitem_index)
 function _PROC(self, i) result(val)
     class(_LIST), intent(in) :: self
     integer, intent(in) :: i
@@ -22,7 +22,7 @@ end function _PROC
 #undef _PROC
 
 
-#define _PROC _CAT(_LIST,getitem_slice)
+#define _PROC _CAT2(_LIST,getitem_slice)
 function _PROC(self, s) result(list)
     class(_LIST), intent(in) :: self
     type(slice), intent(in) :: s
@@ -90,7 +90,7 @@ end function _PROC
 #undef _PROC
 
 
-#define _PROC _CAT(_LIST,append)
+#define _PROC _CAT2(_LIST,append)
 elemental subroutine _PROC(self, object)
     class(_LIST), intent(inout) :: self
     _ARG_TYPE, intent(in) :: object
@@ -110,7 +110,7 @@ end subroutine _PROC
 #undef _PROC
 
 
-#define _PROC _CAT(_LIST,clear)
+#define _PROC _CAT2(_LIST,clear)
 elemental subroutine _PROC(self)
     class(_LIST), intent(inout) :: self
 
@@ -128,7 +128,7 @@ end subroutine _PROC
 #undef _PROC
 
 
-#define _PROC _CAT(_LIST,copy)
+#define _PROC _CAT2(_LIST,copy)
 subroutine _PROC(self, other)
     class(_LIST), intent(in) :: self
     type(_LIST), intent(out) :: other
@@ -154,7 +154,7 @@ end subroutine _PROC
 #undef _PROC
 
 
-#define _PROC _CAT(_LIST,count)
+#define _PROC _CAT2(_LIST,count)
 function _PROC(self, val) result(count)
     class(_LIST), intent(in) :: self
     _ARG_TYPE, intent(in) :: val
@@ -172,7 +172,7 @@ end function _PROC
 #undef _PROC
 
 
-#define _PROC _CAT(_LIST,extend_list)
+#define _PROC _CAT2(_LIST,extend_list)
 subroutine _PROC(self, iterable)
     class(_LIST), intent(inout) :: self
     class(_LIST), intent(in) :: iterable
@@ -202,7 +202,7 @@ end subroutine _PROC
 #undef _PROC
 
 
-#define _PROC _CAT(_LIST,extend_array)
+#define _PROC _CAT2(_LIST,extend_array)
 pure subroutine _PROC(self, iterable)
     class(_LIST), intent(inout) :: self
     _ARG_TYPE, dimension(:), intent(in) :: iterable
@@ -231,7 +231,7 @@ end subroutine _PROC
 #undef _PROC
 
 
-#define _PROC _CAT(_LIST,index)
+#define _PROC _CAT2(_LIST,index)
 function _PROC(self, val, start, stop) result(index)
     class(_LIST), intent(in) :: self
     _ARG_TYPE, intent(in) :: val
@@ -268,7 +268,7 @@ end function _PROC
 #undef _PROC
 
 
-#define _PROC _CAT(_LIST,assign_list)
+#define _PROC _CAT2(_LIST,assign_list)
 subroutine _PROC(self, other)
     class(_LIST), intent(out) :: self
     class(_LIST), intent(in) :: other
@@ -278,7 +278,7 @@ end subroutine _PROC
 #undef _PROC
 
 
-#define _PROC _CAT(_LIST,assign_array)
+#define _PROC _CAT2(_LIST,assign_array)
 subroutine _PROC(self, other)
     class(_LIST), intent(out) :: self
     _ARG_TYPE, dimension(:), intent(in) :: other
@@ -303,7 +303,7 @@ end subroutine _PROC
 #undef _PROC
 
 
-#define _PROC _CAT(_LIST,final)
+#define _PROC _CAT2(_LIST,final)
 elemental subroutine _PROC(self)
     type(_LIST), intent(inout) :: self
 
@@ -312,7 +312,7 @@ end subroutine _PROC
 #undef _PROC
 
 
-#define _PROC _CAT(array_assign,_LIST)
+#define _PROC _CAT2(array_assign,_LIST)
 subroutine _PROC(self, other)
     _TYPE_LEN(:), dimension(:), allocatable, intent(out) :: self
     class(_LIST), intent(in) :: other
@@ -335,7 +335,7 @@ end subroutine _PROC
 #undef _PROC
 
 
-#define _PROC _CAT(size,_LIST)
+#define _PROC _CAT2(size,_LIST)
 elemental function _PROC(self) result(res)
     class(_LIST), intent(in) :: self
     integer :: res
@@ -346,7 +346,7 @@ end function _PROC
 
 
 #if _TYPE_ID == _LOGICAL
-#  define _PROC _CAT(all,_LIST)
+#  define _PROC _CAT2(all,_LIST)
 function _PROC(self) result(res)
     class(_LIST), intent(in) :: self
     logical :: res
@@ -366,7 +366,7 @@ end function _PROC
 #  undef _PROC
 
 
-#  define _PROC _CAT(any,_LIST)
+#  define _PROC _CAT2(any,_LIST)
 function _PROC(self) result(res)
     class(_LIST), intent(in) :: self
     logical :: res
@@ -387,7 +387,7 @@ end function _PROC
 
 #elif _TYPE_ID == _CHARACTER
 
-#  define _PROC _CAT(len,_LIST)
+#  define _PROC _CAT2(len,_LIST)
 function _PROC(self) result(res)
     class(_LIST), intent(in) :: self
     integer :: res
@@ -407,7 +407,7 @@ end function _PROC
 #endif
 
 
-#define _PROC _CAT(_ITER,getitem)
+#define _PROC _CAT2(_ITER,getitem)
 pure function _PROC(self) result(res)
     class(_ITER), intent(in) :: self
     _RES_TYPE :: res
@@ -418,7 +418,7 @@ end function _PROC
 #undef _PROC
 
 
-#define _PROC _CAT(_ITER,setitem)
+#define _PROC _CAT2(_ITER,setitem)
 elemental subroutine _PROC(self, val)
     class(_ITER), intent(inout) :: self
     _ARG_TYPE, intent(in) :: val
@@ -429,7 +429,7 @@ end subroutine _PROC
 #undef _PROC
 
 
-#define _PROC _CAT(_ITER,next)
+#define _PROC _CAT2(_ITER,next)
 elemental subroutine _PROC(self)
     class(_ITER), intent(inout) :: self
 
@@ -439,7 +439,7 @@ end subroutine _PROC
 #undef _PROC
 
 
-#define _PROC _(_ITER)_(_assign_)_(_LIST)
+#define _PROC _CAT3(_ITER,assign,_LIST)
 subroutine _PROC(self, other)
     class(_ITER), intent(out) :: self
     class(_LIST), intent(in) :: other
@@ -449,7 +449,7 @@ end subroutine _PROC
 #undef _PROC
 
 
-#define _PROC _(_ITER)_(_assign_)_(_ITER)
+#define _PROC _CAT3(_ITER,assign,_ITER)
 subroutine _PROC(self, other)
     class(_ITER), intent(out) :: self
     class(_ITER), intent(in) :: other

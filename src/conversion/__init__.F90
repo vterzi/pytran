@@ -1,8 +1,6 @@
 #include "../inc/init.inc"
 #include "../inc/utils.inc"
 
-#define _PROC _CAT(_OP,_LABEL)
-
 module pytran_conversion
     use pytran_utils, only: dec_digits, dec_exponent
 
@@ -87,6 +85,8 @@ module pytran_conversion
         ! left parenthesis + comma + right parenthesis
         COMPLEX_EXTRA_WIDTH = 3
 
+#define _PROC _CAT2(_OP,_LABEL)
+
 #define _TYPE_IDS (_LOGICAL | _INTEGER | _REAL | _COMPLEX)
 #define _OP bin
 #include "../inc/iface.inc"
@@ -100,6 +100,8 @@ module pytran_conversion
 #define _OP character
 #include "../inc/iface.inc"
 #undef _TYPE_IDS
+
+#undef _PROC
 
 contains
 

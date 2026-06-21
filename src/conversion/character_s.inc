@@ -1,4 +1,4 @@
-#define _OP character
+#define _PROC _CAT2(character,_LABEL)
 pure function _PROC(arg, width) result(res)
     _TYPE(len=*, kind=_KIND), intent(in) :: arg
     integer, intent(in), optional :: width
@@ -14,4 +14,4 @@ pure function _PROC(arg, width) result(res)
         res = arg
     end if
 end function _PROC
-#undef _OP
+#undef _PROC

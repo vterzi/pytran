@@ -9,7 +9,7 @@
 #endif
 
 
-#define _OP bin
+#define _PROC _CAT2(bin,_LABEL)
 elemental function _PROC(number) result(res)
     _TYPE(_KIND), intent(in) :: number
     character(len=(_NUM * storage_size(number))) :: res
@@ -21,10 +21,10 @@ elemental function _PROC(number) result(res)
         res, "(" // _NUM_STR // "b" // width // "." // width // ")" &
     ) number
 end function _PROC
-#undef _OP
+#undef _PROC
 
 
-#define _OP oct
+#define _PROC _CAT2(oct,_LABEL)
 elemental function _PROC(number) result(res)
     _TYPE(_KIND), intent(in) :: number
     character(len=(_NUM * storage_size(number) / 4)) :: res
@@ -36,10 +36,10 @@ elemental function _PROC(number) result(res)
         res, "(" // _NUM_STR // "o" // width // "." // width // ")" &
     ) number
 end function _PROC
-#undef _OP
+#undef _PROC
 
 
-#define _OP hex
+#define _PROC _CAT2(hex,_LABEL)
 elemental function _PROC(number) result(res)
     _TYPE(_KIND), intent(in) :: number
     character(len=(_NUM * storage_size(number) / 8)) :: res
@@ -51,4 +51,4 @@ elemental function _PROC(number) result(res)
         res, "(" // _NUM_STR // "z" // width // "." // width // ")" &
     ) number
 end function _PROC
-#undef _OP
+#undef _PROC

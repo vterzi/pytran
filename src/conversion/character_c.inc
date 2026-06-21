@@ -1,4 +1,4 @@
-#define _OP character
+#define _PROC _CAT2(character,_LABEL)
 pure function _PROC(arg, mode, width, decimals, expwidth, sign) result(res)
     _TYPE(_KIND), intent(in) :: arg
     integer, intent(in), optional :: mode, width, decimals, expwidth
@@ -132,4 +132,4 @@ pure function _PROC(arg, mode, width, decimals, expwidth, sign) result(res)
         res = trim(adjustl(buffer))
     end if
 end function _PROC
-#undef _OP
+#undef _PROC
