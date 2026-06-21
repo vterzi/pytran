@@ -365,6 +365,7 @@ elemental function _PROC(self, index) result(val)
     type(_ITEM), pointer :: item, old
 
     size = self%size
+    if (size == 0) error stop "pop from empty list"  ! IndexError
     if (present(index)) then
         idx = wraparound_index(index, size, .true.)
     else
@@ -388,6 +389,7 @@ elemental function _PROC(self, index) result(val)
     end if
     val = old%val
     deallocate(old)
+    self%size = self%size - 1
 end function _PROC
 #undef _PROC
 

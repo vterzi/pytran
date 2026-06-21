@@ -35,7 +35,7 @@ contains
         if (check) then
             if ( &
                 index < 1 .or. index > size &
-            ) error stop "list index out of range"  ! IndexError
+            ) error stop "index out of range"  ! IndexError
         end if
     end function wraparound_index
 
