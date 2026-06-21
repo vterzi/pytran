@@ -94,6 +94,58 @@ end function _PROC
 #undef _PROC
 
 
+#define _PROC _CAT2(_LIST,setitem_index)
+subroutine _PROC(self, key, val)
+    class(_LIST), intent(inout) :: self
+    integer, intent(in) :: key
+    _ARG_TYPE, intent(in) :: val
+
+    type(_ITEM), pointer :: item
+
+    item => self%item(wraparound_index(key, self%size, .true.))
+    item%val = val
+end subroutine _PROC
+#undef _PROC
+
+
+#define _PROC _CAT2(_LIST,setitem_slice_item)
+subroutine _PROC(self, key, val)
+    class(_LIST), intent(inout) :: self
+    type(slice), intent(in) :: key
+    _ARG_TYPE, intent(in) :: val
+
+    integer :: n, lo, up, st, idx, i
+    type(_ITEM), pointer :: item
+
+    n = self%size
+    lo = wraparound_index(key%start, n, .true.)
+    up = wraparound_index(key%stop, n, .true.)
+    st = key%step
+    if (st == 0) then
+        error stop "slice step cannot be zero"  ! ValueError
+    else if (st < 0) then
+        st = -st
+        idx = lo
+        lo = lo - ((lo - up) / st) * st
+        up = idx
+    end if
+    if (lo <= up) then
+        idx = lo
+        item => self%item(idx)
+        item%val = val
+        idx = idx + st
+        do while (idx <= up)
+            do i = 1, st
+                item => item%next
+            end do
+            item%val = val
+            idx = idx + st
+        end do
+    end if
+end subroutine _PROC
+#undef _PROC
+
+
 #define _PROC _CAT2(_LIST,append)
 elemental subroutine _PROC(self, object)
     class(_LIST), intent(inout) :: self
