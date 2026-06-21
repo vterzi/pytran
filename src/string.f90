@@ -185,7 +185,15 @@ contains
         character(len=*), intent(in) :: arg
         character(len=:), allocatable :: res
 
-        res = trim(adjustl(arg))
+        integer :: lo, up
+
+        lo = verify(arg, WHITESPACE)
+        if (lo == 0) then
+            res = ""
+        else
+            up = verify(arg, WHITESPACE, .true.)
+            res = arg(lo:up)
+        end if
     end function strip
 
 
@@ -299,8 +307,8 @@ contains
         i = index(arg, ",")
         res = arg(1:1) == "(" .and. arg(n:n) == ")" .and. i > 0
         if (res) res = ( &
-            is_real(strip(arg(2:(i - 1)))) &
-            .and. is_real(strip(arg((i + 1):(n - 1)))) &
+            is_real(trim(adjustl(arg(2:(i - 1))))) &
+            .and. is_real(trim(adjustl(arg((i + 1):(n - 1))))) &
         )
     end function is_complex
 end module pytran_string
