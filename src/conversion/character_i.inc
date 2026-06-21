@@ -21,9 +21,9 @@ pure function _PROC(arg, width, minimum, sign) result(res)
             sign_ = .false.
         end if
         if (sign_) then
-            sign_str = 'sp,'
+            sign_str = "sp,"
         else
-            sign_str = ''
+            sign_str = ""
         end if
         if (present_width) then
             width_ = max(0, width)
@@ -33,16 +33,16 @@ pure function _PROC(arg, width, minimum, sign) result(res)
         end if
         if (present_minimum) then
             write(minimum_str, *) min(max(0, minimum), width_)
-            minimum_str = '.' // adjustl(minimum_str)
+            minimum_str = "." // adjustl(minimum_str)
         else
-            minimum_str = ''
+            minimum_str = ""
         end if
         write(width_str, *) width_
         allocate(character(len=width_) :: res)
         write( &
             res, &
-            '(' // trim(sign_str) // 'i' // trim(adjustl(width_str)) &
-            // trim(minimum_str) // ')' &
+            "(" // trim(sign_str) // "i" // trim(adjustl(width_str)) &
+            // trim(minimum_str) // ")" &
         ) arg
     else
         write(buffer, *) arg

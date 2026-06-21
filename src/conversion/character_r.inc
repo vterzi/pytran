@@ -32,23 +32,23 @@ pure function _PROC(arg, mode, width, decimals, expwidth, sign) result(res)
         end if
         select case (mode_)
         case (MODE_FIXED)
-            mode_str = 'f'
+            mode_str = "f"
             present_expwidth = .false.
             extra_width = FIXED_EXTRA_WIDTH + max(0, dec_exponent(arg))
         case (MODE_EXPONENTIAL)
-            mode_str = 'e'
+            mode_str = "e"
             extra_width = EXPONENTIAL_EXTRA_WIDTH
         case (MODE_SCIENTIFIC)
-            mode_str = 'es'
+            mode_str = "es"
             extra_width = SCIENTIFIC_EXTRA_WIDTH
         case (MODE_ENGINEERING)
-            mode_str = 'en'
+            mode_str = "en"
             extra_width = SCIENTIFIC_EXTRA_WIDTH + modulo(dec_exponent(arg), 3)
         case (MODE_EXPONENTIAL_D)
-            mode_str = 'd'
+            mode_str = "d"
             extra_width = EXPONENTIAL_EXTRA_WIDTH
         case default
-            mode_str = 'g'
+            mode_str = "g"
             extra_width = EXPONENTIAL_EXTRA_WIDTH
         end select
         if (present_sign) then
@@ -57,9 +57,9 @@ pure function _PROC(arg, mode, width, decimals, expwidth, sign) result(res)
             sign_ = .false.
         end if
         if (sign_) then
-            sign_str = 'sp,'
+            sign_str = "sp,"
         else
-            sign_str = ''
+            sign_str = ""
         end if
         if (present_decimals) then
             decimals_ = max(0, decimals)
@@ -70,10 +70,10 @@ pure function _PROC(arg, mode, width, decimals, expwidth, sign) result(res)
         if (present_expwidth) then
             expwidth_ = max(1, expwidth)
             write(expwidth_str, *) expwidth_
-            expwidth_str = 'e' // adjustl(expwidth_str)
+            expwidth_str = "e" // adjustl(expwidth_str)
         else
             expwidth_ = _(REAL_)_(_KIND_LABEL)_(_EXP_WIDTH)
-            expwidth_str = ''
+            expwidth_str = ""
         end if
         if (present_width) then
             width_ = max(1, width)
@@ -86,9 +86,9 @@ pure function _PROC(arg, mode, width, decimals, expwidth, sign) result(res)
         allocate(character(len=width_) :: res)
         write( &
             res, &
-            '(' // trim(sign_str) // trim(mode_str) &
-            // trim(adjustl(width_str)) // '.' // trim(adjustl(decimals_str)) &
-            // trim(expwidth_str) // ')' &
+            "(" // trim(sign_str) // trim(mode_str) &
+            // trim(adjustl(width_str)) // "." // trim(adjustl(decimals_str)) &
+            // trim(expwidth_str) // ")" &
         ) arg
     else
         write(buffer, *) arg

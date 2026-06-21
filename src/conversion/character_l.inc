@@ -10,7 +10,7 @@ pure function _PROC(arg, width) result(res)
     if (present(width)) then
         write(width_str, *) max(0, width)
         allocate(character(len=width) :: res)
-        write(res, '(l' // trim(adjustl(width_str)) // ')') arg
+        write(res, "(l" // trim(adjustl(width_str)) // ")") arg
     else
         write(buffer, *) arg
         res = trim(adjustl(buffer))
