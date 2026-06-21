@@ -354,6 +354,100 @@ end subroutine _PROC
 #undef _PROC
 
 
+#define _PROC _CAT2(_LIST,pop)
+elemental function _PROC(self, index) result(val)
+    class(_LIST), intent(inout) :: self
+    integer, intent(in), optional :: index
+    _RES_TYPE :: val
+
+    logical :: not_first
+    integer :: size, idx
+    type(_ITEM), pointer :: item, old
+
+    size = self%size
+    if (present(index)) then
+        idx = wraparound_index(index, size, .true.)
+    else
+        idx = size
+    end if
+    not_first = idx > 1
+    if (not_first) then
+        item => self%item(idx - 1)
+        old => item%next
+        item%next => old%next
+    else
+        old => self%first
+        self%first => old%next
+    end if
+    if (idx == size) then
+        if (not_first) then
+            self%last => item
+        else
+            nullify(self%last)
+        end if
+    end if
+    val = old%val
+    deallocate(old)
+end function _PROC
+#undef _PROC
+
+
+#define _PROC _CAT2(_LIST,remove)
+elemental subroutine _PROC(self, val)
+    class(_LIST), intent(inout) :: self
+    _ARG_TYPE, intent(in) :: val
+
+    type(_ITEM), pointer :: item, old
+
+    nullify(old)
+    item => self%first
+    if (associated(item)) then
+        if (_EQ(item%val,val)) then
+            old => item
+            nullify(item)
+            self%first => old%next
+        else
+            do while (associated(item%next))
+                if (_EQ(item%next%val,val)) then
+                    old => item%next
+                    item%next => old%next
+                    exit
+                end if
+                item => item%next
+            end do
+        end if
+    end if
+    if (associated(old)) then
+        if (.not. associated(old%next)) self%last => item
+        deallocate(old)
+        self%size = self%size - 1
+    else
+        error stop "List%remove(x): x not found"  ! ValueError
+    end if
+end subroutine _PROC
+#undef _PROC
+
+
+#define _PROC _CAT2(_LIST,reverse)
+subroutine _PROC(self)
+    class(_LIST), intent(inout) :: self
+
+    type(_ITEM), pointer :: item, next, first
+
+    item => self%first
+    self%last => item
+    nullify(first)
+    do while (associated(item))
+        next => item%next
+        item%next => first
+        first => item
+        item => next
+    end do
+    self%first => first
+end subroutine _PROC
+#undef _PROC
+
+
 #define _PROC _CAT2(_LIST,assign_list)
 subroutine _PROC(self, other)
     class(_LIST), intent(out) :: self

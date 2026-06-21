@@ -36,6 +36,9 @@ contains
     generic :: extend => extend_list, extend_array
     _METHOD(_LIST,index)
     _METHOD(_LIST,insert)
+    _METHOD(_LIST,pop)
+    _METHOD(_LIST,remove)
+    _METHOD(_LIST,reverse)
     _PRIVATE_METHOD(_LIST,assign_list)
     _PRIVATE_METHOD(_LIST,assign_array)
     generic :: assignment(=) => assign_list, assign_array
