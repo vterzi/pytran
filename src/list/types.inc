@@ -9,7 +9,7 @@
 #  define _ELEM_TYPE _TYPE(_KIND)
 #endif
 
-type _ITEM
+type :: _ITEM
     private
     _ELEM_TYPE :: val
     type(_ITEM), pointer :: next => null()

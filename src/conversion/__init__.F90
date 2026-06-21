@@ -2,7 +2,7 @@
 #include "../inc/utils.inc"
 
 module pytran_conversion
-    use pytran_utils, only: dec_digits, dec_exponent
+    use :: pytran_utils, only: dec_digits, dec_exponent
 
     implicit none
 

@@ -6,7 +6,7 @@
 #define _ITER _(Iter)_(_LABEL)
 
 module pytran_list
-    use pytran_slice, only: slice
+    use :: pytran_slice, only: slice
 
     implicit none
 
