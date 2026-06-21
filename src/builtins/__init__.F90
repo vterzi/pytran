@@ -20,6 +20,18 @@ module pytran_builtins
 #define _OP operator(/=)
 #define _OP_NAME ne
 #include "../inc/iface.inc"
+#define _OP operator(<)
+#define _OP_NAME lt
+#include "../inc/iface.inc"
+#define _OP operator(<=)
+#define _OP_NAME le
+#include "../inc/iface.inc"
+#define _OP operator(>)
+#define _OP_NAME gt
+#include "../inc/iface.inc"
+#define _OP operator(>=)
+#define _OP_NAME ge
+#include "../inc/iface.inc"
 #undef _TYPE_IDS1
 #undef _TYPE_IDS2
 #undef _PROC
