@@ -450,6 +450,69 @@ end subroutine _PROC
 #undef _PROC
 
 
+#define _PROC _CAT2(_LIST,sort)
+subroutine _PROC(self)
+    class(_LIST), intent(inout) :: self
+
+    integer :: size, sorted_size, size1, size2, num, i
+    type(_ITEM), target :: zeroth
+    type(_ITEM), pointer :: last, item1, item2, item
+
+    size = self%size
+    zeroth%next => self%first
+    last => self%last
+    sorted_size = 1
+    do while (sorted_size < size)
+        last => zeroth
+        item1 => zeroth%next
+        num = size
+        do while (num > 0)
+            size1 = min(sorted_size, num)
+            num = num - size1
+            item2 => item1
+            do i = 1, size1
+                item2 => item2%next
+            end do
+            size2 = min(sorted_size, num)
+            num = num - size2
+            do
+                if (size2 == 0) then
+                    last%next => item1
+                    do i = 1, size1
+                        last => last%next
+                    end do
+                    item1 => item2
+                    exit
+                else if (size1 == 0) then
+                    last%next => item2
+                    do i = 1, size2
+                        last => last%next
+                    end do
+                    item1 => last%next
+                    exit
+                end if
+                if (_LE(item1%val,item2%val)) then
+                    item => item1
+                    item1 => item1%next
+                    size1 = size1 - 1
+                else
+                    item => item2
+                    item2 => item2%next
+                    size2 = size2 - 1
+                end if
+                last%next => item
+                last => item
+            end do
+        end do
+        nullify(last%next)
+        sorted_size = sorted_size * 2
+    end do
+    self%first => zeroth%next
+    self%last => last
+end subroutine _PROC
+#undef _PROC
+
+
 #define _PROC _CAT2(_LIST,assign_list)
 subroutine _PROC(self, other)
     class(_LIST), intent(out) :: self
