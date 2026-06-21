@@ -1,4 +1,4 @@
-#include "../inc/vars.inc"
+#include "../inc/var.inc"
 #include "../inc/cmp.inc"
 
 
