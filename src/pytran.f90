@@ -6,6 +6,7 @@ module pytran
     use :: pytran_string
     use :: pytran_slice
     use :: pytran_list
+    use :: pytran_math
 
     implicit none
 end module pytran
