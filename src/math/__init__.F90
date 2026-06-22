@@ -36,6 +36,7 @@ module pytran_math
 #endif
 
 #define _PROC _CAT2(_OP,_LABEL)
+
 #define _TYPE_IDS (_LOGICAL | _INTEGER | _REAL)
 #define _OP isfinite
 #include "../inc/iface.inc"
@@ -44,12 +45,24 @@ module pytran_math
 #define _OP isinf
 #include "../inc/iface.inc"
 #undef _TYPE_IDS
+
+#define _TYPE_IDS _INTEGER
+#define _OP gcd
+#include "../inc/iface.inc"
+#undef _TYPE_IDS
+
 #undef _PROC
 
 contains
 
 #define _TYPE_IDS (_LOGICAL | _INTEGER | _REAL)
 #define _FILE "../math/ieee.inc"
+#include "../inc/types.inc"
+#undef _FILE
+#undef _TYPE_IDS
+
+#define _TYPE_IDS _INTEGER
+#define _FILE "../math/gcd.inc"
 #include "../inc/types.inc"
 #undef _FILE
 #undef _TYPE_IDS
