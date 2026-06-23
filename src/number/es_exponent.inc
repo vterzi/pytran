@@ -20,9 +20,12 @@ elemental function _PROC(arg) result(res)
         write( &
             string, &
             ( &
-                cat("(es", width) &
-                // cat(".", decimals) &
-                // cat("e", expwidth) &
+                "(es" &
+                // str(width) &
+                // "." &
+                // str(decimals) &
+                // "e" &
+                // str(expwidth) &
                 // ")" &
             ) &
         ) arg

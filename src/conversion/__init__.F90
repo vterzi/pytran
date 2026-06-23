@@ -2,6 +2,7 @@
 #include "../inc/utils.inc"
 
 module pytran_conversion
+    use :: pytran_utils, only: str
     use :: pytran_number
 
     implicit none
