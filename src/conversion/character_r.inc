@@ -7,11 +7,9 @@ pure function _PROC(arg, mode, width, decimals, expwidth, sign) result(res)
 
     logical :: present_mode, present_width, present_decimals, &
         present_expwidth, present_sign, sign_
-    integer :: mode_, width_, decimals_, expwidth_, extra_width
-    character(len=2) :: mode_str
-    character(len=MAX_LEN_INTEGER_STR) :: width_str, decimals_str, expwidth_str
-    character(len=3) :: sign_str
-    character(len=_(MAX_LEN_REAL_)_(_KIND_LABEL)_(_STR)) :: buffer
+    integer :: mode_, width_, decimals_, expwidth_
+    character(len=:), allocatable :: fmt
+    character(len=_CAT3(MAX_LEN_REAL,_KIND_LABEL,STR)) :: buf
 
     present_mode = present(mode)
     present_width = present(width)
@@ -25,6 +23,13 @@ pure function _PROC(arg, mode, width, decimals, expwidth, sign) result(res)
         .or. present_expwidth &
         .or. present_sign &
     ) then
+        fmt = "("
+        if (present_sign) then
+            sign_ = sign
+        else
+            sign_ = .false.
+        end if
+        if (sign_) fmt = fmt // "sp,"
         if (present_mode) then
             mode_ = mode
         else
@@ -32,67 +37,50 @@ pure function _PROC(arg, mode, width, decimals, expwidth, sign) result(res)
         end if
         select case (mode_)
         case (MODE_FIXED)
-            mode_str = "f"
+            fmt = fmt // "f"
             present_expwidth = .false.
-            extra_width = FIXED_EXTRA_WIDTH + max(0, es_exponent(arg))
+            width_ = FIXED_EXTRA_WIDTH + max(0, es_exponent(arg))
         case (MODE_EXPONENTIAL)
-            mode_str = "e"
-            extra_width = EXPONENTIAL_EXTRA_WIDTH
+            fmt = fmt // "e"
+            width_ = EXPONENTIAL_EXTRA_WIDTH
         case (MODE_SCIENTIFIC)
-            mode_str = "es"
-            extra_width = SCIENTIFIC_EXTRA_WIDTH
+            fmt = fmt // "es"
+            width_ = SCIENTIFIC_EXTRA_WIDTH
         case (MODE_ENGINEERING)
-            mode_str = "en"
-            extra_width = SCIENTIFIC_EXTRA_WIDTH + modulo(es_exponent(arg), 3)
+            fmt = fmt // "en"
+            width_ = SCIENTIFIC_EXTRA_WIDTH + modulo(es_exponent(arg), 3)
         case (MODE_EXPONENTIAL_D)
-            mode_str = "d"
-            extra_width = EXPONENTIAL_EXTRA_WIDTH
+            fmt = fmt // "d"
+            width_ = EXPONENTIAL_EXTRA_WIDTH
         case default
-            mode_str = "g"
-            extra_width = EXPONENTIAL_EXTRA_WIDTH
+            fmt = fmt // "g"
+            width_ = EXPONENTIAL_EXTRA_WIDTH
         end select
-        if (present_sign) then
-            sign_ = sign
-        else
-            sign_ = .false.
-        end if
-        if (sign_) then
-            sign_str = "sp,"
-        else
-            sign_str = ""
-        end if
         if (present_decimals) then
             decimals_ = max(0, decimals)
         else
-            decimals_ = _(REAL_)_(_KIND_LABEL)_(_DEC_DIGITS)
+            decimals_ = _CAT3(REAL,_KIND_LABEL,DEC_DIGITS)
         end if
-        write(decimals_str, *) decimals_
         if (present_expwidth) then
             expwidth_ = max(1, expwidth)
-            write(expwidth_str, *) expwidth_
-            expwidth_str = "e" // adjustl(expwidth_str)
         else
-            expwidth_ = _(REAL_)_(_KIND_LABEL)_(_EXP_WIDTH)
-            expwidth_str = ""
+            expwidth_ = _CAT3(REAL,_KIND_LABEL,EXP_WIDTH)
         end if
         if (present_width) then
             width_ = max(1, width)
         else
-            width_ = decimals_ + extra_width
+            width_ = width_ + decimals_
             if (mode /= MODE_FIXED) width_ = width_ + expwidth_
             if (arg < 0 .or. sign_) width_ = width_ + 1
         end if
-        write(width_str, *) width_
+        fmt = fmt // str(width_) // "." // str(decimals_)
+        if (present_expwidth) fmt = fmt // "e" // str(expwidth_)
+        fmt = fmt // ")"
         allocate(character(len=width_) :: res)
-        write( &
-            res, &
-            "(" // trim(sign_str) // trim(mode_str) &
-            // trim(adjustl(width_str)) // "." // trim(adjustl(decimals_str)) &
-            // trim(expwidth_str) // ")" &
-        ) arg
+        write(res, fmt) arg
     else
-        write(buffer, *) arg
-        res = trim(adjustl(buffer))
+        write(buf, *) arg
+        res = trim(adjustl(buf))
     end if
 end function _PROC
 #undef _PROC

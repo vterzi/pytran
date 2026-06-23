@@ -4,12 +4,12 @@ pure function _PROC(arg, width) result(res)
     integer, intent(in), optional :: width
     character(len=:), allocatable :: res
 
-    character(len=MAX_LEN_INTEGER_STR) :: width_str
+    integer :: width_
 
     if (present(width)) then
-        write(width_str, *) max(0, width)
-        allocate(character(len=width) :: res)
-        write(res, "(a" // trim(adjustl(width_str)) // ")") arg
+        width_ = max(0, width)
+        allocate(character(len=width_) :: res)
+        write(res, "(a" // str(width_) // ")") arg
     else
         res = arg
     end if

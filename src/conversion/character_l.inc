@@ -4,16 +4,16 @@ pure function _PROC(arg, width) result(res)
     integer, intent(in), optional :: width
     character(len=:), allocatable :: res
 
-    character(len=MAX_LEN_INTEGER_STR) :: width_str
-    character(len=MAX_LEN_LOGICAL_STR) :: buffer
+    integer :: width_
+    character(len=MAX_LEN_LOGICAL_STR) :: buf
 
     if (present(width)) then
-        write(width_str, *) max(0, width)
-        allocate(character(len=width) :: res)
-        write(res, "(l" // trim(adjustl(width_str)) // ")") arg
+        width_ = max(0, width)
+        allocate(character(len=width_) :: res)
+        write(res, "(l" // str(width_) // ")") arg
     else
-        write(buffer, *) arg
-        res = trim(adjustl(buffer))
+        write(buf, *) arg
+        res = trim(adjustl(buf))
     end if
 end function _PROC
 #undef _PROC

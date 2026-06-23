@@ -4,6 +4,7 @@
 module pytran_number
     use, intrinsic :: ieee_arithmetic, only: &
         ieee_is_nan, ieee_is_finite, ieee_is_normal
+    use :: pytran_utils, only: str
     use :: pytran_kinds
 
     implicit none
@@ -3936,35 +3937,7 @@ module pytran_number
 
 #undef _PROC
 
-    interface cat
-        module procedure :: I_cat_S
-        module procedure :: S_cat_I
-    end interface cat
-
 contains
-    pure function I_cat_S(arg1, arg2) result(res)
-        integer, intent(in) :: arg1
-        character(len=*), intent(in) :: arg2
-        character(len=:), allocatable :: res
-
-        character(len=_MAX_LEN_INTEGER_STR) :: buf
-
-        write(buf, '(i0)') arg1
-        res = trim(buf) // arg2
-    end function I_cat_S
-
-
-    pure function S_cat_I(arg1, arg2) result(res)
-        character(len=*), intent(in) :: arg1
-        integer, intent(in) :: arg2
-        character(len=:), allocatable :: res
-
-        character(len=_MAX_LEN_INTEGER_STR) :: buf
-
-        write(buf, '(i0)') arg2
-        res = arg1 // trim(buf)
-    end function S_cat_I
-
 
 #define _TYPE_IDS _INTEGER
 #define _FILE "../number/num_digits.inc"
