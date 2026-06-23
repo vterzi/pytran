@@ -1,4 +1,4 @@
-#define _PROC _CAT2(gcd,_LABEL)
+#define _PROC _UNARY_OP(gcd)
 elemental function _PROC(i, j) result(n)
     _TYPE(_KIND), intent(in) :: i, j
     _TYPE(_KIND) :: n

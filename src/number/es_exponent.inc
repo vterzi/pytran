@@ -1,4 +1,4 @@
-#define _PROC _CAT2(es_exponent,_LABEL)
+#define _PROC _UNARY_OP(es_exponent)
 elemental function _PROC(arg) result(res)
     _TYPE(_KIND), intent(in) :: arg
     integer :: res

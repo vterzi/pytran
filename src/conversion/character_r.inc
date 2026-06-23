@@ -1,4 +1,4 @@
-#define _PROC _CAT2(character,_LABEL)
+#define _PROC _UNARY_OP(character)
 pure function _PROC(arg, mode, width, decimals, expwidth, sign) result(res)
     _TYPE(_KIND), intent(in) :: arg
     integer, intent(in), optional :: mode, width, decimals, expwidth

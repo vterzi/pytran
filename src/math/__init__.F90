@@ -10,7 +10,7 @@ module pytran_math
 
     private
 
-#define _PROC _CAT2(_OP,_LABEL)
+#define _PROC _UNARY_OP(_OP)
 
 #define _TYPE_IDS _REAL
 #define _OP inf

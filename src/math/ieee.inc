@@ -1,4 +1,4 @@
-#define _PROC _CAT2(isfinite,_LABEL)
+#define _PROC _UNARY_OP(isfinite)
 elemental function _PROC(x) result(res)
     _TYPE(_KIND), intent(in) :: x
     logical :: res
@@ -12,7 +12,7 @@ end function _PROC
 #undef _PROC
 
 
-#define _PROC _CAT2(isnan,_LABEL)
+#define _PROC _UNARY_OP(isnan)
 elemental function _PROC(x) result(res)
     _TYPE(_KIND), intent(in) :: x
     logical :: res
@@ -26,7 +26,7 @@ end function _PROC
 #undef _PROC
 
 
-#define _PROC _CAT2(isinf,_LABEL)
+#define _PROC _UNARY_OP(isinf)
 elemental function _PROC(x) result(res)
     _TYPE(_KIND), intent(in) :: x
     logical :: res

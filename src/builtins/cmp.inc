@@ -1,7 +1,7 @@
 #include "../inc/vars.inc"
 
 
-#define _PROC _CAT3(_LABEL1,eq,_LABEL2)
+#define _PROC _BINARY_OP(eq)
 elemental function _PROC(arg1, arg2) result(res)
     _ARG_TYPE1, intent(in) :: arg1
     _ARG_TYPE2, intent(in) :: arg2
@@ -12,7 +12,7 @@ end function _PROC
 #undef _PROC
 
 
-#define _PROC _CAT3(_LABEL1,ne,_LABEL2)
+#define _PROC _BINARY_OP(ne)
 elemental function _PROC(arg1, arg2) result(res)
     _ARG_TYPE1, intent(in) :: arg1
     _ARG_TYPE2, intent(in) :: arg2
@@ -23,7 +23,7 @@ end function _PROC
 #undef _PROC
 
 
-#define _PROC _CAT3(_LABEL1,lt,_LABEL2)
+#define _PROC _BINARY_OP(lt)
 elemental function _PROC(arg1, arg2) result(res)
     _ARG_TYPE1, intent(in) :: arg1
     _ARG_TYPE2, intent(in) :: arg2
@@ -34,7 +34,7 @@ end function _PROC
 #undef _PROC
 
 
-#define _PROC _CAT3(_LABEL1,le,_LABEL2)
+#define _PROC _BINARY_OP(le)
 elemental function _PROC(arg1, arg2) result(res)
     _ARG_TYPE1, intent(in) :: arg1
     _ARG_TYPE2, intent(in) :: arg2
@@ -45,7 +45,7 @@ end function _PROC
 #undef _PROC
 
 
-#define _PROC _CAT3(_LABEL1,gt,_LABEL2)
+#define _PROC _BINARY_OP(gt)
 elemental function _PROC(arg1, arg2) result(res)
     _ARG_TYPE1, intent(in) :: arg1
     _ARG_TYPE2, intent(in) :: arg2
@@ -56,7 +56,7 @@ end function _PROC
 #undef _PROC
 
 
-#define _PROC _CAT3(_LABEL1,ge,_LABEL2)
+#define _PROC _BINARY_OP(ge)
 elemental function _PROC(arg1, arg2) result(res)
     _ARG_TYPE1, intent(in) :: arg1
     _ARG_TYPE2, intent(in) :: arg2

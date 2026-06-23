@@ -11,32 +11,27 @@ module pytran_builtins
         False = .false., &
         True = .true.
 
-#define _PROC _CAT3(_LABEL1,_OP_NAME,_LABEL2)
+#define _PROC _BINARY_OP(_OP)
+#define _IFACE operator(._OP.)
 #define _TYPE_IDS1 _LOGICAL
 #define _TYPE_IDS2 _LOGICAL
-#define _OP operator(==)
-#define _OP_NAME eq
+#define _OP eq
 #include "../inc/iface.inc"
-#define _OP operator(/=)
-#define _OP_NAME ne
+#define _OP ne
 #include "../inc/iface.inc"
-#define _OP operator(<)
-#define _OP_NAME lt
+#define _OP lt
 #include "../inc/iface.inc"
-#define _OP operator(<=)
-#define _OP_NAME le
+#define _OP le
 #include "../inc/iface.inc"
-#define _OP operator(>)
-#define _OP_NAME gt
+#define _OP gt
 #include "../inc/iface.inc"
-#define _OP operator(>=)
-#define _OP_NAME ge
+#define _OP ge
 #include "../inc/iface.inc"
 #undef _TYPE_IDS1
 #undef _TYPE_IDS2
 #undef _PROC
 
-#define _PROC _CAT2(_OP,_LABEL)
+#define _PROC _UNARY_OP(_OP)
 #define _TYPE_IDS (_LOGICAL | _INTEGER | _REAL | _COMPLEX | _CHARACTER)
 #define _OP assign_optional
 #include "../inc/iface.inc"

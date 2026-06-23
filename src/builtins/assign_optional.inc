@@ -1,7 +1,7 @@
 #include "../inc/var.inc"
 
 
-#define _PROC _CAT2(assign_optional,_LABEL)
+#define _PROC _UNARY_OP(assign_optional)
 elemental subroutine _PROC(var, val, opt)
     _ARG_TYPE, intent(out) :: var
     _ARG_TYPE, intent(in) :: val

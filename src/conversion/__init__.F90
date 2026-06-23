@@ -74,7 +74,7 @@ module pytran_conversion
         ! left parenthesis + comma + right parenthesis
         COMPLEX_EXTRA_WIDTH = 3
 
-#define _PROC _CAT2(_OP,_LABEL)
+#define _PROC _UNARY_OP(_OP)
 
 #define _TYPE_IDS (_LOGICAL | _INTEGER | _REAL | _COMPLEX)
 #define _OP bin

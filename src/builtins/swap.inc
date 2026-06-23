@@ -1,7 +1,7 @@
 #include "../inc/var.inc"
 
 
-#define _PROC _CAT2(swap,_LABEL)
+#define _PROC _UNARY_OP(swap)
 elemental subroutine _PROC(arg1, arg2)
     _ARG_TYPE, intent(inout) :: arg1, arg2
 

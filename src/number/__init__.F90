@@ -3923,7 +3923,7 @@ module pytran_number
     ]
 #endif
 
-#define _PROC _CAT2(_OP,_LABEL)
+#define _PROC _UNARY_OP(_OP)
 
 #define _TYPE_IDS _INTEGER
 #define _OP num_digits

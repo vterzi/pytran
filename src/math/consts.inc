@@ -1,4 +1,4 @@
-#define _PROC _CAT2(inf,_LABEL)
+#define _PROC _UNARY_OP(inf)
 elemental function _PROC(x) result(res)
     _TYPE(_KIND), intent(in) :: x
     _TYPE(_KIND) :: res
@@ -8,7 +8,7 @@ end function _PROC
 #undef _PROC
 
 
-#define _PROC _CAT2(nan,_LABEL)
+#define _PROC _UNARY_OP(nan)
 elemental function _PROC(x) result(res)
     _TYPE(_KIND), intent(in) :: x
     _TYPE(_KIND) :: res
