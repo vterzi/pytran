@@ -10,7 +10,7 @@ elemental function _PROC(arg) result(res)
 
     integer :: idx
     _TYPE(_KIND) :: num
-    character(len=width), allocatable :: string
+    character(len=width) :: string
 
     if (.not. ieee_is_finite(arg)) then
         res = huge(res)
