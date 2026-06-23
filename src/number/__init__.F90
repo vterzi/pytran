@@ -3925,12 +3925,12 @@ module pytran_number
 #define _PROC _CAT2(_OP,_LABEL)
 
 #define _TYPE_IDS _INTEGER
-#define _OP dec_digits
+#define _OP num_digits
 #include "../inc/iface.inc"
 #undef _TYPE_IDS
 
 #define _TYPE_IDS _REAL
-#define _OP dec_exponent
+#define _OP es_exponent
 #include "../inc/iface.inc"
 #undef _TYPE_IDS
 
@@ -3967,13 +3967,13 @@ contains
 
 
 #define _TYPE_IDS _INTEGER
-#define _FILE "../number/dec_digits.inc"
+#define _FILE "../number/num_digits.inc"
 #include "../inc/types.inc"
 #undef _FILE
 #undef _TYPE_IDS
 
 #define _TYPE_IDS _REAL
-#define _FILE "../number/dec_exponent.inc"
+#define _FILE "../number/es_exponent.inc"
 #include "../inc/types.inc"
 #undef _FILE
 #undef _TYPE_IDS

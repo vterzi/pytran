@@ -1,4 +1,4 @@
-#define _PROC _CAT2(dec_digits,_LABEL)
+#define _PROC _CAT2(num_digits,_LABEL)
 elemental function _PROC(arg) result(res)
     _TYPE(_KIND), intent(in) :: arg
     integer :: res

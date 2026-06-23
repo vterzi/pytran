@@ -40,9 +40,9 @@ pure function _PROC(arg, mode, width, decimals, expwidth, sign) result(res)
             mode_str = "f"
             present_expwidth = .false.
             extra_width_real = FIXED_EXTRA_WIDTH &
-                + max(0, dec_exponent(real_part))
+                + max(0, es_exponent(real_part))
             extra_width_imag = FIXED_EXTRA_WIDTH &
-                + max(0, dec_exponent(imag_part))
+                + max(0, es_exponent(imag_part))
         case (MODE_EXPONENTIAL)
             mode_str = "e"
             extra_width_real = EXPONENTIAL_EXTRA_WIDTH
@@ -54,9 +54,9 @@ pure function _PROC(arg, mode, width, decimals, expwidth, sign) result(res)
         case (MODE_ENGINEERING)
             mode_str = "en"
             extra_width_real = SCIENTIFIC_EXTRA_WIDTH &
-                + modulo(dec_exponent(real_part), 3)
+                + modulo(es_exponent(real_part), 3)
             extra_width_imag = SCIENTIFIC_EXTRA_WIDTH &
-                + modulo(dec_exponent(imag_part), 3)
+                + modulo(es_exponent(imag_part), 3)
         case (MODE_EXPONENTIAL_D)
             mode_str = "d"
             extra_width_real = EXPONENTIAL_EXTRA_WIDTH

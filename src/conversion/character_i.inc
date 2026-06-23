@@ -28,7 +28,7 @@ pure function _PROC(arg, width, minimum, sign) result(res)
         if (present_width) then
             width_ = max(0, width)
         else
-            width_ = dec_digits(arg)
+            width_ = num_digits(arg)
             if (arg < 0 .or. sign_) width_ = width_ + 1
         end if
         if (present_minimum) then
