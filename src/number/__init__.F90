@@ -3949,8 +3949,8 @@ contains
 
         character(len=_MAX_LEN_INTEGER_STR) :: buf
 
-        write(buf, *) arg1
-        res = trim(adjustl(buf)) // arg2
+        write(buf, '(i0)') arg1
+        res = trim(buf) // arg2
     end function I_cat_S
 
 
@@ -3961,8 +3961,8 @@ contains
 
         character(len=_MAX_LEN_INTEGER_STR) :: buf
 
-        write(buf, *) arg2
-        res = arg1 // trim(adjustl(buf))
+        write(buf, '(i0)') arg2
+        res = arg1 // trim(buf)
     end function S_cat_I
 
 
