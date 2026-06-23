@@ -2,7 +2,7 @@
 #include "../inc/utils.inc"
 
 module pytran_conversion
-    use :: pytran_utils, only: dec_digits, dec_exponent
+    use :: pytran_number
 
     implicit none
 
@@ -24,40 +24,28 @@ module pytran_conversion
     integer, parameter :: MAX_LEN_INTEGER_K16_STR = _MAX_LEN_INTEGER_K16_STR
 #endif
 
-    ! REAL_K_DEC_DIGITS = ceiling(digits(0._K) * log10(2.))
-    ! REAL_K_EXP_WIDTH = ceiling(log10(log10(huge(0._K))))
 #ifdef _HP
     integer, parameter :: &
-        REAL_HP_DEC_DIGITS = 4, &
-        REAL_HP_EXP_WIDTH = 1, &
         MAX_LEN_REAL_HP_STR = _MAX_LEN_REAL_HP_STR, &
         MAX_LEN_COMPLEX_HP_STR = _MAX_LEN_COMPLEX_HP_STR
 #endif
 #ifdef _SP
     integer, parameter :: &
-        REAL_SP_DEC_DIGITS = 8, &
-        REAL_SP_EXP_WIDTH = 2, &
         MAX_LEN_REAL_SP_STR = _MAX_LEN_REAL_SP_STR, &
         MAX_LEN_COMPLEX_SP_STR = _MAX_LEN_COMPLEX_SP_STR
 #endif
 #ifdef _DP
     integer, parameter :: &
-        REAL_DP_DEC_DIGITS = 16, &
-        REAL_DP_EXP_WIDTH = 3, &
         MAX_LEN_REAL_DP_STR = _MAX_LEN_REAL_DP_STR, &
         MAX_LEN_COMPLEX_DP_STR = _MAX_LEN_COMPLEX_DP_STR
 #endif
 #ifdef _XDP
     integer, parameter :: &
-        REAL_XDP_DEC_DIGITS = 20, &
-        REAL_XDP_EXP_WIDTH = 4, &
         MAX_LEN_REAL_XDP_STR = _MAX_LEN_REAL_XDP_STR, &
         MAX_LEN_COMPLEX_XDP_STR = _MAX_LEN_COMPLEX_XDP_STR
 #endif
 #ifdef _QP
     integer, parameter :: &
-        REAL_QP_DEC_DIGITS = 35, &
-        REAL_QP_EXP_WIDTH = 4, &
         MAX_LEN_REAL_QP_STR = _MAX_LEN_REAL_QP_STR, &
         MAX_LEN_COMPLEX_QP_STR = _MAX_LEN_COMPLEX_QP_STR
 #endif
